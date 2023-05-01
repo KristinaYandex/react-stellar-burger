@@ -1,0 +1,34 @@
+.section {
+  padding-top: 40px;
+}
+
+.ingredient_container {
+  max-width: 600px;
+  height: 584px;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+
+.ingredient_list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px 24px;
+  max-width: 600px;
+  margin-bottom: 40px;
+  margin-top: 24px;
+}
+
+.menu {
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+.ingredient_container::-webkit-scrollbar {
+  width: 8px;
+  background: #2F2F37;
+}
+
+.ingredient_container::-webkit-scrollbar-thumb {
+  width: 8px;
+  background: #8585AD;
+}
