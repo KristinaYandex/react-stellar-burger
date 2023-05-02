@@ -1,5 +1,5 @@
 import { ConstructorElement, DragIcon, CurrencyIcon, Button } from "@ya.praktikum/react-developer-burger-ui-components";
-import burgerConstructorStyle from "./burgerconstructor.module.css";
+import burgerConstructorStyle from "./burger-constructor.module.css";
 import {ingredientPropType} from "../../utils/prop-types"
 import PropTypes from "prop-types";
 
@@ -11,26 +11,15 @@ function BurgerConstructor({ingredient}) {
     return (
       <div className={burgerConstructorStyle.container}>
         <div className={burgerConstructorStyle.list}>
-          <div className={burgerConstructorStyle.buns}>
-            {bun ? (
-              <ConstructorElement
-                type="top"
-                isLocked={true}
-                text={`${bun.name} (верх)`}
-                price={bun.price}
-                thumbnail={bun.image}
-              />
-            ): null}
-            {bun ? (
-              <ConstructorElement
-                type="bottom"
-                isLocked={true}
-                text={`${bun.name} (низ)`}
-                price={bun.price}
-                thumbnail={bun.image}
-              />
-            ): null}
-          </div>
+          {bun ? (
+            <ConstructorElement
+              type="top"
+              isLocked={true}
+              text={`${bun.name} (верх)`}
+              price={bun.price}
+              thumbnail={bun.image}
+            />
+          ): null}
           <ul className={burgerConstructorStyle.main}>
             {mainAndSauce.map((ingredient) => {
               return (
@@ -45,6 +34,15 @@ function BurgerConstructor({ingredient}) {
               );
             })}
           </ul>
+          {bun ? (
+            <ConstructorElement
+              type="bottom"
+              isLocked={true}
+              text={`${bun.name} (низ)`}
+              price={bun.price}
+              thumbnail={bun.image}
+            />
+          ): null}
         </div>
         <div className={burgerConstructorStyle.order}>
           <div className={burgerConstructorStyle.cost}>

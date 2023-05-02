@@ -9,16 +9,8 @@
   scroll-behavior: smooth;
 }
 
-.ingredient_list {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 32px 24px;
-  max-width: 600px;
-  margin-bottom: 40px;
-  margin-top: 24px;
-}
-
 .menu {
+  display: flex;
   margin-top: 20px;
   margin-bottom: 40px;
 }

@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
 
 export const ingredientPropType = PropTypes.shape({
-  _id: PropTypes.string,
-  name: PropTypes.string,
-  type: PropTypes.string,
-  price: PropTypes.number,
-  image: PropTypes.string
+  _id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  image: PropTypes.string.isRequired
 });
