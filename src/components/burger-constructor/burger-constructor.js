@@ -2,11 +2,24 @@ import { ConstructorElement, DragIcon, CurrencyIcon, Button } from "@ya.praktiku
 import burgerConstructorStyle from "./burger-constructor.module.css";
 import {ingredientPropType} from "../../utils/prop-types"
 import PropTypes from "prop-types";
+import Modal from "../modal/modal";
+import { useState } from "react";
+import OrderDetails from "../order-details/order-details"
 
-function BurgerConstructor({ingredient}) {
+function BurgerConstructor({ingredient, portalRef}) {
   
     const mainAndSauce = ingredient.filter((item) => item.type !== "bun"); /*Начинки и соусы*/ 
     const bun = ingredient.find((item) => item.type === "bun") /*Булки*/ 
+
+    const [isOpen, setIsOpen] = useState(false);
+
+    const openModal = () =>  {
+      setIsOpen(true);
+    }
+
+    const closeModal = () => {
+      setIsOpen(false);
+    }
     
     return (
       <div className={burgerConstructorStyle.container}>
@@ -23,7 +36,7 @@ function BurgerConstructor({ingredient}) {
           <ul className={burgerConstructorStyle.main}>
             {mainAndSauce.map((ingredient) => {
               return (
-                <li className={burgerConstructorStyle.mainSauce}>
+                <li key={ingredient._id} className={burgerConstructorStyle.mainSauce}>
                   <DragIcon type="primary" />
                   <ConstructorElement
                     text={ingredient.name}
@@ -49,16 +62,21 @@ function BurgerConstructor({ingredient}) {
             <p className="text text_type_digits-medium">610</p>
             <CurrencyIcon type="primary"/>
           </div>
-          <Button htmlType="button" type="primary" size="large">
+          <Button htmlType="button" type="primary" size="large" onClick={openModal}>
             Оформить заказ
           </Button>
         </div>
+        {isOpen && (
+          <Modal onClose={closeModal} portalRef={portalRef}>
+            <OrderDetails />
+          </Modal>)
+        }
       </div>
     );
 }
 
-BurgerConstructor.PropType = {
+BurgerConstructor.propTypes = {
   ingredient: PropTypes.arrayOf(ingredientPropType.isRequired).isRequired
 }
 
-export default BurgerConstructor ;
+export default BurgerConstructor;
