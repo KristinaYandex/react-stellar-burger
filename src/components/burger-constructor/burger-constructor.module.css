@@ -10,8 +10,6 @@
   margin-top: 100px;
   max-width: 584px;
   height: 532px;
-  overflow-y: scroll;
-  scroll-behavior: smooth;
 }
 
 .main {
@@ -19,6 +17,8 @@
   flex-direction: column;
   row-gap: 16px;
   padding: 0;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
 }
 
 .mainSauce{
@@ -43,12 +43,12 @@
 }
 
 
-.list::-webkit-scrollbar {
+.main::-webkit-scrollbar {
   width: 8px;
   background: #2F2F37;
 }
 
-.list::-webkit-scrollbar-thumb {
+.main::-webkit-scrollbar-thumb {
   width: 8px;
   background: #8585AD;
 }
