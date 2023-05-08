@@ -5,7 +5,7 @@ import {ingredientPropType} from "../../utils/prop-types.js"
 const IngredientBurger = ({ingredient, onClick}) => {
   return (
     <div className={ingredientBurgerStyle.ingredient} onClick={onClick}>
-      <Counter />
+      <Counter count={1} size="default" extraClass="m-1" />
       <img src={ingredient.image} alt="Ингредиент" />
         <div className={ingredientBurgerStyle.ingredient_price}>
           <p className="text text_type_digits-default">{ingredient.price}</p>

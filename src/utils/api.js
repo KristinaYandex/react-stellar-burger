@@ -1,4 +1,4 @@
-const url = "https://norma.nomoreparties.space/api/ingredients";
+const URL = "https://norma.nomoreparties.space/api";
 
 function serverResponse(res) {
   if (res.ok) {
@@ -8,8 +8,6 @@ function serverResponse(res) {
 }
 
 export function getIngredients() {
-  return fetch(`${url}`, {
-    method: 'GET',
-  })
-  .then(res => serverResponse(res));
+  return fetch(`${URL}/ingredients`)
+  .then(res => serverResponse(res))
 }

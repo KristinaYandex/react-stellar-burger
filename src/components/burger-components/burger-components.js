@@ -3,7 +3,7 @@ import burgerComponents from "./burger-components.module.css";
 import IngredientBurger from "../ingredient-burger/ingredient-burger";
 import {ingredientPropType} from "../../utils/prop-types"
 import PropTypes from "prop-types";
-import IngredientDetails from "../ingredient-details/ingredient-details"
+import IngredientDetails from "../ingredient-details/ingredient-details";
 
 function BurgerComponents({ingredients, openModal}, ref) {
 
@@ -25,7 +25,8 @@ function BurgerComponents({ingredients, openModal}, ref) {
 }
 
 BurgerComponents.propTypes = {
-  ingredient: PropTypes.arrayOf(ingredientPropType.isRequired).isRequired,
+  ingredients: PropTypes.arrayOf(ingredientPropType.isRequired).isRequired,
+  openModal: PropTypes.func.isRequired
 }
 
 export default forwardRef(BurgerComponents);

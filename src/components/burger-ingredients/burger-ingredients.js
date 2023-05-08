@@ -6,7 +6,7 @@ import Modal from "../modal/modal";
 import {ingredientPropType} from "../../utils/prop-types"
 import PropTypes from "prop-types";
 
-function BurgerIngredients({ingredient, portalRef}) {
+function BurgerIngredients({ingredient}) {
     const [current, setCurrent] = useState("buns");
     const [isIngredientModalOpen, setIsIngredientModalOpen] = useState(false);
     const [IngredientModal, setIngredientModal] = useState(null);
@@ -66,7 +66,7 @@ function BurgerIngredients({ingredient, portalRef}) {
           <BurgerComponents ingredients={mains} ref={scrollRef} openModal={openModal} />
         </div>
         {isIngredientModalOpen && (
-          <Modal onClose={closeModal} title="Детали ингредиента" portalRef={portalRef}>
+          <Modal onClose={closeModal} title="Детали ингредиента">
             {IngredientModal}
           </Modal>)
         }

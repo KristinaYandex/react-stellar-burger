@@ -6,7 +6,7 @@ import Modal from "../modal/modal";
 import { useState } from "react";
 import OrderDetails from "../order-details/order-details"
 
-function BurgerConstructor({ingredient, portalRef}) {
+function BurgerConstructor({ingredient}) {
   
     const mainAndSauce = ingredient.filter((item) => item.type !== "bun"); /*Начинки и соусы*/ 
     const bun = ingredient.find((item) => item.type === "bun") /*Булки*/ 
@@ -25,7 +25,7 @@ function BurgerConstructor({ingredient, portalRef}) {
       <div className={burgerConstructorStyle.container}>
         <div className={burgerConstructorStyle.list}>
           {bun ? (
-            <ConstructorElement
+            <ConstructorElement className="mr-50"
               type="top"
               isLocked={true}
               text={`${bun.name} (верх)`}
@@ -67,7 +67,7 @@ function BurgerConstructor({ingredient, portalRef}) {
           </Button>
         </div>
         {isOpen && (
-          <Modal onClose={closeModal} portalRef={portalRef}>
+          <Modal onClose={closeModal}>
             <OrderDetails />
           </Modal>)
         }

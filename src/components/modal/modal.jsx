@@ -1,11 +1,13 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 import ReactDOM from "react-dom";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import stylesModal from "./modal.module.css";
 import ModalOverlay from "../modal-overlay/modal-overlay";
+import PropTypes from 'prop-types';
 
+function Modal ({children, onClose, title}) {
 
-function Modal ({children, onClose, title, portalRef}) {
+  const reactModals = document.getElementById("react-modals");
 
   useEffect(() => {
     function closeEsc(evt) {
@@ -32,8 +34,14 @@ function Modal ({children, onClose, title, portalRef}) {
         <div className={stylesModal.component}>{children}</div>
       </div>
     </>,
-    portalRef.current
+    reactModals
   );
+}
+
+Modal.propTypes = {
+  children: PropTypes.element,
+  onClose: PropTypes.func.isRequired,
+  title: PropTypes.string,
 }
 
 export default Modal;
