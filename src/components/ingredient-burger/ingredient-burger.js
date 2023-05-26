@@ -2,10 +2,10 @@ import { CurrencyIcon, Counter } from "@ya.praktikum/react-developer-burger-ui-c
 import ingredientBurgerStyle from "./ingredient-burger.module.css";
 import {ingredientPropType} from "../../utils/prop-types.js"
 
-const IngredientBurger = ({ingredient}) => {
+const IngredientBurger = ({ingredient, onClick}) => {
   return (
-    <div className={ingredientBurgerStyle.ingredient}>
-      <Counter />
+    <div className={ingredientBurgerStyle.ingredient} onClick={onClick}>
+      <Counter count={1} size="default" extraClass="m-1" />
       <img src={ingredient.image} alt="Ингредиент" />
         <div className={ingredientBurgerStyle.ingredient_price}>
           <p className="text text_type_digits-default">{ingredient.price}</p>
@@ -16,7 +16,7 @@ const IngredientBurger = ({ingredient}) => {
   );
 }
 
-IngredientBurger.PropType = {
+IngredientBurger.propTypes = {
   ingredient: ingredientPropType.isRequired
 }
 
