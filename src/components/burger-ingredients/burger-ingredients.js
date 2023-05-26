@@ -1,15 +1,17 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useContext } from "react";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import burgerIngredients from "./burger-ingredients.module.css";
 import BurgerComponents from "../burger-components/burger-components";
 import Modal from "../modal/modal";
 import {ingredientPropType} from "../../utils/prop-types"
 import PropTypes from "prop-types";
+import {IngredientsContext} from "../../services/burgerContext.js";
 
-function BurgerIngredients({ingredient}) {
+function BurgerIngredients() {
     const [current, setCurrent] = useState("buns");
     const [isIngredientModalOpen, setIsIngredientModalOpen] = useState(false);
     const [IngredientModal, setIngredientModal] = useState(null);
+    const ingredient = useContext(IngredientsContext);
 
     const openModal = (element) => {
       setIsIngredientModalOpen(true);

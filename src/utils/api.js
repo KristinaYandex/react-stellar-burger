@@ -11,3 +11,16 @@ export function getIngredients() {
   return fetch(`${URL}/ingredients`)
   .then(res => serverResponse(res))
 }
+
+export function postIngredients(arrayIngredients) {
+  return fetch(`${URL}/orders`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify ({
+      ingredients: arrayIngredients
+    })
+  })
+  .then(res => serverResponse(res))
+}
