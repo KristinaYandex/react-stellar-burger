@@ -15,7 +15,7 @@ function BurgerComponents({ingredients, openModal}, ref) {
           key={ingredient._id} 
           ingredient={ingredient} 
           onClick={() => {
-            openModal(<IngredientDetails ingredient={ingredient}/>)
+            openModal(ingredient)
           }} 
           />
         ))}
