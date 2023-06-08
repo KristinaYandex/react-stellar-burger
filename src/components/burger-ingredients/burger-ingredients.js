@@ -1,11 +1,9 @@
-import { useRef, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import burgerIngredient from "./burger-ingredients.module.css";
 import BurgerComponents from "../burger-components/burger-components";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import Modal from "../modal/modal";
-import {ingredientPropType} from "../../utils/prop-types"
-import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { getIngredientsFeed } from "../../services/actions/burger-ingredients";
 import { useInView } from 'react-intersection-observer';
@@ -14,7 +12,6 @@ import { visibleIngredient, closeIngredient } from "../../services/actions/ingre
 function BurgerIngredients() {
   const [current, setCurrent] = useState("buns");
   const [isIngredientModalOpen, setIsIngredientModalOpen] = useState(false);
-  /*const [IngredientModal, setIngredientModal] = useState(null);*/
   const dispatch = useDispatch();
     
   const getBurgerIngredients = (store) => store.burgerIngredientsReducer.ingredients;
@@ -45,8 +42,6 @@ function BurgerIngredients() {
   const buns = burgerIngredients.filter((item) => item.type === Tabs.bun); /*Булки*/ 
   const mains = burgerIngredients.filter((item) => item.type === Tabs.main); /*Соусы*/ 
   const sauces = burgerIngredients.filter((item) => item.type === Tabs.sauce); /*Начинки*/ 
-
-  /*const ingredientsForBurgerRef = useRef();*/
 
   function executeScroll(selectTab) {
     setCurrent(selectTab);
@@ -109,10 +104,6 @@ function BurgerIngredients() {
       </section>
     </>
   );
-}
-
-BurgerIngredients.propTypes = {
-  ingredient: PropTypes.arrayOf(ingredientPropType.isRequired).isRequired,
 }
 
 export default BurgerIngredients;

@@ -1,12 +1,9 @@
-import React, { useCallback } from "react";
+import React from "react";
 import { ConstructorElement, CurrencyIcon, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import burgerConstructorStyle from "./burger-constructor.module.css";
-import {ingredientPropType} from "../../utils/prop-types"
-import PropTypes from "prop-types";
 import Modal from "../modal/modal";
 import { useState } from "react";
 import OrderDetails from "../order-details/order-details";
-import {OrderContext} from "../../services/burgerContext.js";
 import { createOrderFeed } from "../../services/actions/order-details";
 import { useDrop } from "react-dnd";
 import { ADD_INGREDIENT, DELETE_INGREDIENT, addIngredient, deleteIngredient, sortIngredient } from "../../services/actions/burger-constructor";
@@ -14,7 +11,6 @@ import { useDispatch, useSelector } from "react-redux";
 import ConstructorIngredient from "../constructor-ingredient/constructor-ingredient";
 
 function BurgerConstructor() {
-    const [order, setOrder] = useState("");
     const [isOpen, setIsOpen] = useState(false);
     const dispatch = useDispatch();
 
@@ -98,20 +94,13 @@ function BurgerConstructor() {
             Оформить заказ
           </Button>
         </div>
-        <OrderContext.Provider value={order}>
           {isOpen && (
             <Modal onClose={closeModal}>
               <OrderDetails />
             </Modal>)
           }
-        </OrderContext.Provider>
       </div>
     );
 }
-
-/*BurgerConstructor.propTypes = {
-  ingredient: PropTypes.arrayOf(ingredientPropType.isRequired).isRequired,
-  order: PropTypes.number.isRequired
-}*/
 
 export default BurgerConstructor;

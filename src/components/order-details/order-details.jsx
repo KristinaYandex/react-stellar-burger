@@ -1,6 +1,5 @@
 import orderDetails from "./order-details.module.css";
 import doneIcon from "../../images/done.svg";
-import PropTypes from 'prop-types';
 import { useSelector } from "react-redux";
 
 function OrderDetails() {
@@ -16,10 +15,6 @@ function OrderDetails() {
         <p className="text text_type_main-default text_color_inactive">Дождитесь готовности на орбитальной станции</p>
       </div>
     )
-  }
-
-  OrderDetails.propTypes = {
-    order: PropTypes.number.isRequired
   }
   
   export default OrderDetails;

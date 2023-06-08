@@ -3,7 +3,6 @@ import burgerComponents from "./burger-components.module.css";
 import IngredientBurger from "../ingredient-burger/ingredient-burger";
 import {ingredientPropType} from "../../utils/prop-types"
 import PropTypes from "prop-types";
-import IngredientDetails from "../ingredient-details/ingredient-details";
 
 function BurgerComponents({ingredients, openModal}, ref) {
 

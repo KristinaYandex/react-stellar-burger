@@ -4,7 +4,6 @@ import { CurrencyIcon, Counter } from "@ya.praktikum/react-developer-burger-ui-c
 import ingredientBurgerStyle from "./ingredient-burger.module.css";
 import {ingredientPropType} from "../../utils/prop-types.js";
 import { useDrag } from "react-dnd";
-import { SORT_INGREDIENT } from "../../services/actions/burger-constructor";
 
 const IngredientBurger = ({ingredient, onClick}) => {
 
