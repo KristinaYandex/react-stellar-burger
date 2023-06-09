@@ -4,6 +4,8 @@ export const ADD_INGREDIENT = 'ADD_INGREDIENT';
 export const DELETE_INGREDIENT = 'DELETE_INGREDIENT';
 export const SORT_INGREDIENT = 'SORT_INGREDIENT';
 export const SUM_INGREDIENT = 'SUM_INGREDIENT';
+export const СLEAR_CONSTRUCTOR = 'CLEAR_CONSTRUCTOR';
+
 
 export function addIngredient(item) {
   return {

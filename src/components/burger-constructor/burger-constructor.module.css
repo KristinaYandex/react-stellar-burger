@@ -42,6 +42,10 @@
   column-gap: 10px;
 }
 
+.bun {
+  display: flex;
+}
+
 
 .main::-webkit-scrollbar {
   width: 8px;

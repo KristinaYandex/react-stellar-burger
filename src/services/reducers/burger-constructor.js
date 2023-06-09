@@ -1,4 +1,4 @@
-import { ADD_INGREDIENT, DELETE_INGREDIENT, SORT_INGREDIENT } from "../actions/burger-constructor";
+import { ADD_INGREDIENT, DELETE_INGREDIENT, SORT_INGREDIENT, СLEAR_CONSTRUCTOR } from "../actions/burger-constructor";
 import arrayMove from '../../utils/array-move';
 
 export const initialState = {
@@ -29,6 +29,13 @@ export const burgerConstructorReducer = (state = initialState, action) => {
         mainAndSauce: state.mainAndSauce.filter(
           ({id}) => id !== action.payload
         ),
+      };
+    }
+    case СLEAR_CONSTRUCTOR: {
+      return {
+        ...state,
+        bun: null,
+        mainAndSauce: []
       };
     }
     case SORT_INGREDIENT: {
