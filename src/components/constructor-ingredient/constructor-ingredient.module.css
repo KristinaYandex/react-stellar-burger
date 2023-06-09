@@ -1,0 +1,10 @@
+.ingredient {
+  width: 536px;
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+}
+  
+.icon {
+  cursor: grab;
+}

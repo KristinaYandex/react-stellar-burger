@@ -1,40 +1,83 @@
-import React from "react";
-import { useRef } from "react";
+import { useState, useEffect } from "react";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
-import burgerIngredients from "./burger-ingredients.module.css";
+import burgerIngredient from "./burger-ingredients.module.css";
 import BurgerComponents from "../burger-components/burger-components";
-import {ingredientPropType} from "../../utils/prop-types"
-import PropTypes from "prop-types";
+import IngredientDetails from "../ingredient-details/ingredient-details";
+import Modal from "../modal/modal";
+import { useDispatch, useSelector } from "react-redux";
+import { getIngredientsFeed } from "../../services/actions/burger-ingredients";
+import { useInView } from 'react-intersection-observer';
+import { visibleIngredient, closeIngredient } from "../../services/actions/ingredient-details";
 
-function BurgerIngredients({ingredient}) {
-    const [current, setCurrent] = React.useState("buns");
+function BurgerIngredients() {
+  const [current, setCurrent] = useState("buns");
+  const [isIngredientModalOpen, setIsIngredientModalOpen] = useState(false);
+  const dispatch = useDispatch();
+    
+  const getBurgerIngredients = (store) => store.burgerIngredientsReducer.ingredients;
+  const burgerIngredients = useSelector(getBurgerIngredients);
 
-    const Tabs = {
-      bun: "bun",
-      sauce: "sauce",
-      main: "main"
+
+  const openModal = (item) => {
+    setIsIngredientModalOpen(true);
+    dispatch(visibleIngredient(item));
+  }
+
+  const closeModal = () => {
+    setIsIngredientModalOpen(false);
+    dispatch(closeIngredient());
+  }
+
+  const Tabs = {
+    bun: "bun",
+    sauce: "sauce",
+    main: "main"
+  }
+
+  useEffect(() => {
+    dispatch(getIngredientsFeed());
+  }, [dispatch]);
+  
+
+  const buns = burgerIngredients.filter((item) => item.type === Tabs.bun); /*Булки*/ 
+  const mains = burgerIngredients.filter((item) => item.type === Tabs.main); /*Соусы*/ 
+  const sauces = burgerIngredients.filter((item) => item.type === Tabs.sauce); /*Начинки*/ 
+
+  function executeScroll(selectTab) {
+    setCurrent(selectTab);
+    const item = document.getElementById(selectTab);
+    if (item) {
+      return item.scrollIntoView({ behavior: "smooth" });
     }
+  }
 
-    const buns = ingredient.filter((item) => item.type === Tabs.bun); /*Булки*/ 
-    const mains = ingredient.filter((item) => item.type === Tabs.main); /*Соусы*/ 
-    const sauces = ingredient.filter((item) => item.type === Tabs.sauce); /*Начинки*/ 
+  const [ bunRef, bunInView ] = useInView({
+    threshold: 0,
+  });
 
-    const ingredientsForBurgerRef = useRef();
+  const [ sauceRef, sauceInView ] = useInView({
+    threshold: 0,
+  });
 
-    const scrollRef = useRef(null);
-      function executeScroll(selectTab) {
-        setCurrent(selectTab);
-        const item = document.getElementById(selectTab);
-        if (item) {
-          return item.scrollIntoView({ behavior: "smooth" });
-        }
-      }
+  const [ mainRef, mainInView ] = useInView({
+    threshold: 0,
+  });
+
+  useEffect(() => {
+    if (bunInView) {
+      setCurrent("buns")
+    } else if (sauceInView) {
+      setCurrent("sauces")
+    } else if (mainInView) {
+      setCurrent("mains")
+    }
+  }, [bunInView, sauceInView, mainInView])
 
   return (
     <>
-      <section className={burgerIngredients.section}>
+      <section className={burgerIngredient.section}> 
         <h1 className="text text_type_main-large">Соберите бургер</h1>
-        <div className={burgerIngredients.menu}>
+        <div className={burgerIngredient.menu}>
           <Tab value="buns" active={current === "buns"} onClick={executeScroll}>
             Булки
           </Tab>
@@ -45,21 +88,22 @@ function BurgerIngredients({ingredient}) {
             Начинки
           </Tab>
         </div>
-        <div className={burgerIngredients.ingredient_container}>
-          <h2 className="text text_type_main-medium" id="buns" ref={ingredientsForBurgerRef}>Булки</h2>
-          <BurgerComponents ingredient={buns} ref={scrollRef} />
-          <h2 className="text text_type_main-medium" id="sauces" ref={ingredientsForBurgerRef}>Соусы</h2>
-          <BurgerComponents ingredient={sauces} ref={scrollRef} />
-          <h2 className="text text_type_main-medium" id="mains" ref={ingredientsForBurgerRef}>Начинки</h2>
-          <BurgerComponents ingredient={mains} ref={scrollRef} />
+        <div className={burgerIngredient.ingredient_container}>
+          <h2 className="text text_type_main-medium" id="buns" ref={bunRef}>Булки</h2>
+          <BurgerComponents ingredients={buns} openModal={openModal} />
+          <h2 className="text text_type_main-medium" id="sauces" ref={sauceRef}>Соусы</h2>
+          <BurgerComponents ingredients={sauces}  openModal={openModal} />
+          <h2 className="text text_type_main-medium" id="mains" ref={mainRef}>Начинки</h2>
+          <BurgerComponents ingredients={mains} openModal={openModal} />
         </div>
+        {isIngredientModalOpen && (
+          <Modal onClose={closeModal} title="Детали ингредиента">
+            <IngredientDetails/> 
+          </Modal>)
+        }
       </section>
     </>
   );
-}
-
-BurgerIngredients.PropType = {
-  ingredient: PropTypes.arrayOf(ingredientPropType.isRequired).isRequired,
 }
 
 export default BurgerIngredients;
