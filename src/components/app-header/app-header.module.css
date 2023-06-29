@@ -29,3 +29,6 @@
   margin-right: 311px;
 }
 
+.active {
+  color: rgba(242, 242, 243, 1);
+}

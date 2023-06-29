@@ -5,10 +5,3 @@
   color: #f2f2f3;
   padding-bottom: 40px;
 }
-
-.mainPage{
-  display: flex;
-  flex-direction: row;
-  margin: 0 auto;
-  column-gap: 56px;
-}

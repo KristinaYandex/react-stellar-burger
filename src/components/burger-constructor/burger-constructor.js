@@ -1,4 +1,5 @@
 import React from "react";
+import { Link, useHistory } from "react-router-dom";
 import { ConstructorElement, CurrencyIcon, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import burgerConstructorStyle from "./burger-constructor.module.css";
 import Modal from "../modal/modal";
@@ -9,10 +10,13 @@ import { useDrop } from "react-dnd";
 import { ADD_INGREDIENT, DELETE_INGREDIENT, addIngredient, deleteIngredient, sortIngredient } from "../../services/actions/burger-constructor";
 import { useDispatch, useSelector } from "react-redux";
 import ConstructorIngredient from "../constructor-ingredient/constructor-ingredient";
+import { useAuth } from "../../hooks/useAuth";
 
 function BurgerConstructor() {
     const [isOpen, setIsOpen] = useState(false);
     const dispatch = useDispatch();
+    const isAuth = useAuth();
+    const history = useHistory();
 
     const getallIngredients = (store) => ({
       bun: store.burgerConstructorReducer.bun,
@@ -20,8 +24,11 @@ function BurgerConstructor() {
     })
  
     const {bun, mainAndSauce} = useSelector(getallIngredients);
+
+    /*const user = (store) => store.getUserReducer.name;
+    const userName = useSelector(user);*/
     
-    const idIngredients = mainAndSauce.map((item) => item._id); /*Id ингредиентов*/ 
+    const idIngredients = mainAndSauce.map((item) => item._id); /*Id ингредиентов*/
 
     const openModal = () =>  {
       setIsOpen(true);
@@ -31,6 +38,16 @@ function BurgerConstructor() {
 
     const closeModal = () => {
       setIsOpen(false);
+    }
+
+    const onOpenButtonClick = () => {
+      console.log("!!!");
+      if (isAuth) {
+        openModal();
+        console.log("!!!");
+      } else {
+        history.push("/login");
+      }
     }
 
     const onDropHandler = (item) => {
@@ -98,17 +115,22 @@ function BurgerConstructor() {
             <p className="text text_type_digits-medium">{totalSum ? totalSum : 0}</p>
             <CurrencyIcon type="primary"/>
           </div>
-          <Button htmlType="button" type="primary" size="large" onClick={openModal} disabled={!isValidOrder}>
+          <Button htmlType="button" type="primary" size="large" onClick={onOpenButtonClick} disabled={!isValidOrder}>
             Оформить заказ
           </Button>
         </div>
-          {isOpen && (
-            <Modal onClose={closeModal}>
-              <OrderDetails />
-            </Modal>)
-          }
+        {isOpen && (
+          <Modal onClose={closeModal}>
+            <OrderDetails />
+          </Modal>)
+        }
       </div>
     );
 }
 
 export default BurgerConstructor;
+
+/*{!userName && (
+  <Link to="/login">
+  </Link>)
+}*/
