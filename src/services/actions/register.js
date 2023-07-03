@@ -14,12 +14,10 @@ export function registerFeed(emailUser, passwordUser, nameUser) {
       .then((res) => {
         if (res && res.success) {
           setCookie("token", res.accessToken);
-          localStorage.setItem("token", res.refreshToken);
+          localStorage.setItem("refreshToken", res.refreshToken);
           dispatch({
             type: CREATE_USER_SUCCESS,
-            email: res.user.email,
-            password: res.user.password,
-            name: res.user.name
+            user: res.user
           })
         } else {
                 // Если произошла ошибка, отправляем соответствующий экшен

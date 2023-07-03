@@ -15,8 +15,7 @@ export function updateUserFeed(emailUser, nameUser) {
         if (res && res.success) {
           dispatch({
             type: UPDATE_USER_SUCCESS,
-            email: res.user.email,
-            name: res.user.name
+            user: res.user
           })
         } else {
                 // Если произошла ошибка, отправляем соответствующий экшен

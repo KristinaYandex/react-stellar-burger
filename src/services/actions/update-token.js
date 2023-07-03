@@ -16,8 +16,7 @@ export function updateTokenFeed() {
           setCookie("token", res.accessToken);
           localStorage.setItem("token", res.refreshToken);
           dispatch({
-            type: UPDATE_TOKEN_SUCCESS,
-            user: res.user
+            type: UPDATE_TOKEN_SUCCESS
           })
         } else {
                 // Если произошла ошибка, отправляем соответствующий экшен

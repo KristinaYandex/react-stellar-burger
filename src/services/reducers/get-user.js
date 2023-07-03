@@ -1,8 +1,7 @@
 import { GET_USER_FEED, GET_USER_SUCCESS, GET_USER_FAILED } from "../actions/get-user";
   
 let initialState = {
-  email: null,
-  name: null,
+  user: null,
   getUserRequest: false,
   getUserFailed: false,
 }
@@ -19,8 +18,7 @@ export const getUserReducer = (state = initialState, action) => {
     case GET_USER_SUCCESS: {
       return { 
         ...state, 
-        email: action.user.email,
-        name: action.user.name,
+        user: action.user,
         getUserRequest: false,
         getUserFailed: false,
       };

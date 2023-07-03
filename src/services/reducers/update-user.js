@@ -1,8 +1,7 @@
 import { UPDATE_USER_FEED, UPDATE_USER_SUCCESS, UPDATE_USER_FAILED } from "../actions/update-user";
   
 let initialState = {
-  email: null,
-  name: null,
+  user: null,
   updateUserRequest: false,
   updateUserFailed: false,
 }
@@ -19,8 +18,7 @@ export const updateUserReducer = (state = initialState, action) => {
     case UPDATE_USER_SUCCESS: {
       return { 
         ...state, 
-        email: action.user.email,
-        name: action.user.name,
+        user: action.user,
         updateUserRequest: false,
         updateUserFailed: false,
       };

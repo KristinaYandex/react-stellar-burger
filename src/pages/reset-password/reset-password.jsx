@@ -58,7 +58,7 @@ export function ResetPasswordPage() {
             name="password"
             onChange={onChange}
           />
-          <Button onClick={handleSubmit} primary={true}>
+          <Button onClick={handleSubmit} htmlType="button" type="primary">
             Сохранить
           </Button>
           <p>Вспомнили пароль?<NavLink to="/">Войти</NavLink></p>

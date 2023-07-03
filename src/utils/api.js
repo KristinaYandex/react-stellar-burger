@@ -94,7 +94,6 @@ export function updateToken() {
   .then(res => serverResponse(res))
 }
 
-
 export function logOutOfSystem() {
   return fetch(`${URL}/auth/logout`, {
     method: 'POST',

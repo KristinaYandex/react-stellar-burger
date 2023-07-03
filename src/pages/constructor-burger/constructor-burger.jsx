@@ -1,4 +1,4 @@
-import BurgerConstructorPageStyles from "./app.module.css";
+import BurgerConstructorPageStyles from "./constructor-burger.module.css";
 import BurgerIngredients from "../../components/burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../../components/burger-constructor/burger-constructor";
 import { DndProvider } from "react-dnd";

@@ -4,8 +4,7 @@ import IngredientBurger from "../ingredient-burger/ingredient-burger";
 import {ingredientPropType} from "../../utils/prop-types"
 import PropTypes from "prop-types";
 
-function BurgerComponents({ingredients, openModal}, ref) {
-
+const BurgerComponents = forwardRef(({ingredients, openModal}, ref) => {
   return (
     <>
       <div className={burgerComponents.ingredient_list} ref={ref}>
@@ -21,11 +20,11 @@ function BurgerComponents({ingredients, openModal}, ref) {
       </div>
     </>
   );
-}
+})
 
 BurgerComponents.propTypes = {
   ingredients: PropTypes.arrayOf(ingredientPropType.isRequired).isRequired,
   openModal: PropTypes.func.isRequired
 }
 
-export default forwardRef(BurgerComponents);
+export default BurgerComponents;

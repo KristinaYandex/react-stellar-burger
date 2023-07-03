@@ -1,9 +1,7 @@
 import { CREATE_USER_FEED, CREATE_USER_SUCCESS, CREATE_USER_FAILED } from "../actions/register";
   
 let initialState = {
-  email: null,
-  name: null,
-  password: null,
+  user: null,
   createUserRequest: false,
   createUserFailed: false,
 }
@@ -20,9 +18,7 @@ export const registerReducer = (state = initialState, action) => {
     case CREATE_USER_SUCCESS: {
       return { 
         ...state, 
-        email: action.user.email,
-        name: action.user.name,
-        password: action.user.password,
+        user: action.user,
         createUserRequest: false,
         createUserFailed: false,
       };

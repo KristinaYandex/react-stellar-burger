@@ -1,15 +1,28 @@
-import { NavLink } from 'react-router-dom';
 import profilePageStyles from './profile.module.css';
 import { Input, EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useState } from 'react'; 
+import { useDispatch } from 'react-redux'; 
+import { logOutFeed } from "../../services/actions/logout";
+import { useHistory, NavLink } from "react-router-dom";
 
 export function ProfilePage() {
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   const [form, setForm] = useState({ email: '', password: '' });
 
   const onChange = e => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
+
+  const onLogout = (e) => {
+    e.preventDefault();
+    dispatch(
+      logOutFeed(() => {
+        history.push("/login")
+      })
+    )
+  } 
 
   return (
     <div className={profilePageStyles.wrapper}>
@@ -21,9 +34,9 @@ export function ProfilePage() {
           <NavLink to='/profile/orders'className={profilePageStyles.link} activeClassName={profilePageStyles.link_active}> 
             История заказов
           </NavLink>
-          <NavLink className={profilePageStyles.link} activeClassName={profilePageStyles.link_active}> 
+          <Button type="button" className="text text_type_main-medium text_color_inactive" onClick={onLogout}> 
             Выход
-          </NavLink>
+          </Button>
           <p>В этом разделе вы можете изменить свои персональные данные</p>
         </nav>
         <form className={profilePageStyles.form}>
@@ -36,10 +49,6 @@ export function ProfilePage() {
             onChange={onChange}
             icon="EditIcon"
           />
-          <Button primary={true}>
-            Зарегистрироваться
-          </Button>
-          <p>Уже зарегистрированы?<NavLink to="/login">Войти</NavLink></p>
         </form>
       </div>
     </div>

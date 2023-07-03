@@ -5,7 +5,7 @@ export const LOGOUT_FEED = "LOGOUT_FEED";
 export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
 export const LOGOUT_FAILED = "LOGOUT_FAILED";
 
-export function logOutFeed() {
+export function logOutFeed(onSuccess) {
   return function(dispatch) {
     dispatch({
       type: LOGOUT_FEED
@@ -18,6 +18,8 @@ export function logOutFeed() {
           dispatch({
             type: LOGOUT_SUCCESS,
           })
+          console.debug("logout success!")
+          onSuccess()
         } else {
                 // Если произошла ошибка, отправляем соответствующий экшен
           dispatch({

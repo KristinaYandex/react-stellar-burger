@@ -11,5 +11,5 @@ export const ingredientPropType = PropTypes.shape({
   carbohydrates: PropTypes.number.isRequired,
   calories: PropTypes.number.isRequired,
   image_large: PropTypes.string.isRequired,
-  dragInfo: PropTypes.string.isRequired
+  dragInfo: PropTypes.string
 });

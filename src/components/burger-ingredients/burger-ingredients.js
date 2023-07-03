@@ -5,7 +5,6 @@ import BurgerComponents from "../burger-components/burger-components";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import Modal from "../modal/modal";
 import { useDispatch, useSelector } from "react-redux";
-import { getIngredientsFeed } from "../../services/actions/burger-ingredients";
 import { useInView } from 'react-intersection-observer';
 import { visibleIngredient, closeIngredient } from "../../services/actions/ingredient-details";
 
@@ -33,12 +32,7 @@ function BurgerIngredients() {
     sauce: "sauce",
     main: "main"
   }
-
-  useEffect(() => {
-    dispatch(getIngredientsFeed());
-  }, [dispatch]);
   
-
   const buns = burgerIngredients.filter((item) => item.type === Tabs.bun); /*Булки*/ 
   const mains = burgerIngredients.filter((item) => item.type === Tabs.main); /*Соусы*/ 
   const sauces = burgerIngredients.filter((item) => item.type === Tabs.sauce); /*Начинки*/ 

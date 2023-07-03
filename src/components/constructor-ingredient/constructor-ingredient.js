@@ -6,13 +6,13 @@ import constructorIngredientStyle from './constructor-ingredient.module.css';
 import {ingredientPropType} from "../../utils/prop-types";
 import PropTypes from "prop-types";
 
-const ConstructorIngredient = (props) => {
-  const { name, price, image, id, dragInfo } = props
-  const dispatch = useDispatch()
+const ConstructorIngredient = (ConstructorIngredientRow) => {
+  const { name, price, image, id, dragInfo } = ConstructorIngredientRow;
+  const dispatch = useDispatch();
   
   const [, dragFromRef] = useDrag({
     type: "ConstructorIngredientRow",
-    item: dragInfo,
+    item: dragInfo
   })
 
   const [, dropToRef] = useDrop({

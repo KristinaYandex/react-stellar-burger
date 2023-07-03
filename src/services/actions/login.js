@@ -14,11 +14,10 @@ export function authorizationFeed(emailUser, passwordUser) {
       .then((res) => {
         if (res && res.success) {
           setCookie("token", res.accessToken);
-          localStorage.setItem("token", res.refreshToken);
+          localStorage.setItem("refreshToken", res.refreshToken);
           dispatch({
             type: AUTHORIZATION_USER_SUCCESS,
-            email: res.user.email,
-            password: res.user.password
+            user: res.user
           })
         } else {
                 // Если произошла ошибка, отправляем соответствующий экшен

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { ConstructorElement, CurrencyIcon, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import burgerConstructorStyle from "./burger-constructor.module.css";
 import Modal from "../modal/modal";
@@ -10,12 +10,10 @@ import { useDrop } from "react-dnd";
 import { ADD_INGREDIENT, DELETE_INGREDIENT, addIngredient, deleteIngredient, sortIngredient } from "../../services/actions/burger-constructor";
 import { useDispatch, useSelector } from "react-redux";
 import ConstructorIngredient from "../constructor-ingredient/constructor-ingredient";
-import { useAuth } from "../../hooks/useAuth";
 
 function BurgerConstructor() {
     const [isOpen, setIsOpen] = useState(false);
     const dispatch = useDispatch();
-    const isAuth = useAuth();
     const history = useHistory();
 
     const getallIngredients = (store) => ({
@@ -25,8 +23,8 @@ function BurgerConstructor() {
  
     const {bun, mainAndSauce} = useSelector(getallIngredients);
 
-    /*const user = (store) => store.getUserReducer.name;
-    const userName = useSelector(user);*/
+    const getUser = (store) => store.getUserReducer.user;
+    const user = useSelector(getUser);
     
     const idIngredients = mainAndSauce.map((item) => item._id); /*Id ингредиентов*/
 
@@ -41,10 +39,8 @@ function BurgerConstructor() {
     }
 
     const onOpenButtonClick = () => {
-      console.log("!!!");
-      if (isAuth) {
+      if (user) {
         openModal();
-        console.log("!!!");
       } else {
         history.push("/login");
       }
@@ -129,8 +125,3 @@ function BurgerConstructor() {
 }
 
 export default BurgerConstructor;
-
-/*{!userName && (
-  <Link to="/login">
-  </Link>)
-}*/

@@ -1,10 +1,9 @@
 import { AUTHORIZATION_USER_FEED, AUTHORIZATION_USER_SUCCESS, AUTHORIZATION_USER_FAILED } from "../actions/login";
   
 let initialState = {
-  email: null,
-  name: null,
-  createUserRequest: false,
-  createUserFailed: false,
+  user: null,
+  authorizationUserRequest: false,
+  authorizationUserFailed: false,
 }
 
 export const loginReducer = (state = initialState, action) => {
@@ -12,24 +11,23 @@ export const loginReducer = (state = initialState, action) => {
     case AUTHORIZATION_USER_FEED: {
       return {
         ...state,
-        createUserRequest: true, //Запрос начал выполняться
-        createUserFailed: false, //Статус наличия ошибок
+        authorizationUserRequest: true, //Запрос начал выполняться
+        authorizationUserFailed: false, //Статус наличия ошибок
       };
     }
     case AUTHORIZATION_USER_SUCCESS: {
       return { 
         ...state, 
-        email: action.user.email,
-        name: action.user.name,
-        createUserRequest: false,
-        createUserFailed: false,
+        user: action.user,
+        authorizationUserRequest: false,
+        authorizationUserFailed: false,
       };
     }
     case AUTHORIZATION_USER_FAILED: {
       return { 
         ...state, 
-        createUserRequest: false, 
-        createUserFailed: true
+        authorizationUserRequest: false, 
+        authorizationUserFailed: true
       };
     }
     default: {
