@@ -1,6 +1,6 @@
 import { NavLink, useHistory } from 'react-router-dom';
 import resetPasswordStyles from './reset-password.module.css';
-import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
+import { PasswordInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { resetPasswordFeed, RESET_PASSWORD_FEED, RESET_PASSWORD_SUCCESS, RESET_PASSWORD_FAILED } from '../../services/actions/reset-password';
 import { useDispatch, useSelector } from 'react-redux';
 import { registerFeed } from '../../services/actions/register';
@@ -42,29 +42,27 @@ export function ResetPasswordPage() {
     }*/
 
   return (
-    <div className={resetPasswordStyles.container}>
-      <form className={resetPasswordStyles.form}>
-        <h2 className={resetPasswordStyles.heading}>Восстановление пароля</h2>
-        <Input
-          placeholder="Введите новый пароль"
-          value={form.password}
-          name="password"
-          onChange={onChange}
-        />
-        <Input
-          placeholder="Введите код из письма"
-          value={form.token}
-          name="token"
-          onChange={onChange}
-        />
-        <div className={resetPasswordStyles.button}>
-          <Button onClick={handleSubmit} htmlType="button" type="primary" size="medium">
+    <div className={resetPasswordStyles.wrapper}>
+      <div className={resetPasswordStyles.container}>
+        <form className={resetPasswordStyles.form}>
+          <h1 className={resetPasswordStyles.heading}>Восстановление пароля</h1>
+          <dInput
+            placeholder="Введите новый пароль"
+            value={form.password}
+            name="password"
+            onChange={onChange}
+          />
+          <Input
+            placeholder="Введите код из письма"
+            value={form.token}
+            name="token"
+            onChange={onChange}
+          />
+          <Button onClick={handleSubmit} htmlType="button" type="primary">
             Сохранить
           </Button>
-        </div>
-      </form>
-      <div className={resetPasswordStyles.links}>
-        <p className="text text_type_main-default text_color_inactive">Вспомнили пароль?<NavLink to="/login" className={resetPasswordStyles.link}>Войти</NavLink></p>
+          <p>Вспомнили пароль?<NavLink to="/">Войти</NavLink></p>
+        </form>
       </div>
     </div>
   );

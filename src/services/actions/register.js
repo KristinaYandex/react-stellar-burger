@@ -1,5 +1,6 @@
 import { createUser } from "../../utils/api";
 import { setCookie } from "../../utils/cookie";
+import { GET_USER_SUCCESS } from "./get-user";
   
 export const CREATE_USER_FEED = "CREATE_USER_FEED";
 export const CREATE_USER_SUCCESS = "CREATE_USER_SUCCESS";
@@ -17,6 +18,10 @@ export function registerFeed(emailUser, passwordUser, nameUser) {
           localStorage.setItem("refreshToken", res.refreshToken);
           dispatch({
             type: CREATE_USER_SUCCESS,
+            user: res.user
+          })
+          dispatch({
+            type: GET_USER_SUCCESS,
             user: res.user
           })
         } else {

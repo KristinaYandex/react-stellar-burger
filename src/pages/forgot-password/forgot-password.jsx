@@ -1,12 +1,13 @@
 import { NavLink } from 'react-router-dom';
 import { EmailInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import forgotPasswordStyles from './forgot-password.module.css';
+import { forgotPasswordFeed } from '../../services/actions/forgot-password';
 
 export function ForgotPasswordPage() {
-
+  const dispatch = useDispatch();
   const history = useHistory();
 
   const [form, setForm] = useState({ email: '' });
@@ -15,32 +16,28 @@ export function ForgotPasswordPage() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const getForgotPasswordStatus = (store) => ({
-    forgotPasswordRequest: store.forgotPasswordReducer.forgotPasswordRequest,
-    forgotPasswordFailed: store.forgotPasswordReducer.forgotPasswordFailed
-  })
-
-  const {forgotPasswordRequest, forgotPasswordFailed} = useSelector(getForgotPasswordStatus);
-
-  useEffect(() => {
-    const isForgotSendSuccess = !forgotPasswordRequest && !forgotPasswordFailed
-
-    if (isForgotSendSuccess) {
-      history.push('/reset-password')
-    }
-  }, [forgotPasswordRequest, forgotPasswordFailed])
+  const onForgotPassword = (e) => {
+    e.preventDefault();
+    dispatch(
+      forgotPasswordFeed(form, () => {
+        history.push('/reset-password')
+      })
+    )
+  }
 
   return (
-    <div className={forgotPasswordStyles.wrapper}>
-      <div className={forgotPasswordStyles.container}>
-        <form className={forgotPasswordStyles.form}>
-          <h1 className={forgotPasswordStyles.heading}>Восстановление пароля</h1>
-          <EmailInput placeholder="Укажите e-mail" value={form.email} name="email" onChange={onChange} />
-          <Button primary={true}>
+    <div className={forgotPasswordStyles.container}>
+      <form className={forgotPasswordStyles.form}>
+        <h2 className={forgotPasswordStyles.heading}>Восстановление пароля</h2>
+        <EmailInput placeholder="Укажите e-mail" value={form.email} name="email" onChange={onChange} />
+        <div className={forgotPasswordStyles.button}>
+          <Button onClick={onForgotPassword} htmlType="button" type="primary" size="medium">
             Восстановить
           </Button>
-          <p>Вспомнили пароль?<NavLink to="/">Войти</NavLink></p>
-        </form>
+        </div>
+      </form>
+      <div className={forgotPasswordStyles.links}>
+        <p className="text text_type_main-default text_color_inactive">Вспомнили пароль?<NavLink to="/login" className={forgotPasswordStyles.link}>Войти</NavLink></p>
       </div>
     </div>
   );

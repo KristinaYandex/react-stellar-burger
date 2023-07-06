@@ -88,7 +88,7 @@ export function updateToken() {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      token: localStorage.getItem("refreshToken")
+      token: localStorage.getItem('refreshToken')
     })
   })
   .then(res => serverResponse(res))
@@ -101,7 +101,7 @@ export function logOutOfSystem() {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      token: localStorage.getItem("refreshToken")
+      token: localStorage.getItem('refreshToken')
     })
   })
   .then(res => serverResponse(res))
@@ -112,7 +112,7 @@ export function getUser() {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      authorization: getCookie("token")
+      authorization: getCookie('token')
     },
   })
   .then(res => serverResponse(res))
@@ -123,7 +123,7 @@ export function updateUser(emailUser, nameUser) {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
-      authorization: getCookie("token")
+      authorization: getCookie('token')
     },
     body: JSON.stringify({
       email: emailUser,

@@ -20,7 +20,6 @@ export function ResetPasswordPage() {
     createUserRequest: store.registerReducer.createUserRequest,
     createUserFailed: store.registerReducer.createUserFailed
   })
-  const {createUserRequest, createUserFailed} = useSelector(getUserRegisterStatus);
 
   const [form, setForm] = useState({ password: '', token: '' });
 
@@ -32,14 +31,18 @@ export function ResetPasswordPage() {
     e.preventDefault();
     dispatch(resetPasswordFeed(form.password, form.token));
     if (!resetPasswordRequest && !resetPasswordFailed) {
-      history.push('/login')
+      history.push('/')
     }
   }
 
-  /*dispatch(registerFeed(form.email, form.password, form.name));
-    if (!createUserRequest && !createUserFailed) {
-      history.push('/')
-    }*/
+  /*const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(
+      resetPasswordFeed(form, () => {
+        history.push('/')
+      })
+    )
+  }*/
 
   return (
     <div className={resetPasswordStyles.container}>

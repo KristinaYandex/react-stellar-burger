@@ -9,7 +9,7 @@ export function ProfilePage() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const [form, setForm] = useState({ email: '', password: '' });
+  const [form, setForm] = useState({ name: '', email: '', password: '' });
 
   const onChange = e => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -34,7 +34,7 @@ export function ProfilePage() {
           <NavLink to='/profile/orders'className={profilePageStyles.link} activeClassName={profilePageStyles.link_active}> 
             История заказов
           </NavLink>
-          <Button type="button" className="text text_type_main-medium text_color_inactive" onClick={onLogout}> 
+          <Button htmlType="submit" className="text text_type_main-medium text_color_inactive" onClick={onLogout}> 
             Выход
           </Button>
           <p>В этом разделе вы можете изменить свои персональные данные</p>

@@ -2,30 +2,14 @@ import { useState, useEffect } from "react";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import burgerIngredient from "./burger-ingredients.module.css";
 import BurgerComponents from "../burger-components/burger-components";
-import IngredientDetails from "../ingredient-details/ingredient-details";
-import Modal from "../modal/modal";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useInView } from 'react-intersection-observer';
-import { visibleIngredient, closeIngredient } from "../../services/actions/ingredient-details";
 
 function BurgerIngredients() {
   const [current, setCurrent] = useState("buns");
-  const [isIngredientModalOpen, setIsIngredientModalOpen] = useState(false);
-  const dispatch = useDispatch();
     
   const getBurgerIngredients = (store) => store.burgerIngredientsReducer.ingredients;
   const burgerIngredients = useSelector(getBurgerIngredients);
-
-
-  const openModal = (item) => {
-    setIsIngredientModalOpen(true);
-    dispatch(visibleIngredient(item));
-  }
-
-  const closeModal = () => {
-    setIsIngredientModalOpen(false);
-    dispatch(closeIngredient());
-  }
 
   const Tabs = {
     bun: "bun",
@@ -83,18 +67,13 @@ function BurgerIngredients() {
           </Tab>
         </div>
         <div className={burgerIngredient.ingredient_container}>
-          <h2 className="text text_type_main-medium" id="buns" ref={bunRef}>Булки</h2>
-          <BurgerComponents ingredients={buns} openModal={openModal} />
-          <h2 className="text text_type_main-medium" id="sauces" ref={sauceRef}>Соусы</h2>
-          <BurgerComponents ingredients={sauces}  openModal={openModal} />
-          <h2 className="text text_type_main-medium" id="mains" ref={mainRef}>Начинки</h2>
-          <BurgerComponents ingredients={mains} openModal={openModal} />
+          <h2 className="text text_type_main-medium" id="buns">Булки</h2>
+          <BurgerComponents ingredients={buns} ref={bunRef} />
+          <h2 className="text text_type_main-medium" id="sauces">Соусы</h2>
+          <BurgerComponents ingredients={sauces} ref={sauceRef} />
+          <h2 className="text text_type_main-medium" id="mains">Начинки</h2>
+          <BurgerComponents ingredients={mains} ref={mainRef} />
         </div>
-        {isIngredientModalOpen && (
-          <Modal onClose={closeModal} title="Детали ингредиента">
-            <IngredientDetails/> 
-          </Modal>)
-        }
       </section>
     </>
   );

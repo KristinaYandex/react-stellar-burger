@@ -31,23 +31,25 @@ export function LoginPage() {
   }
 
   return (
-    <div className={loginPageStyles.wrapper}>
-      <div className={loginPageStyles.container}>
-        <form className={loginPageStyles.form}>
-          <h1 className={loginPageStyles.heading}>Вход</h1>
-          <EmailInput placeholder="Email" value={form.email} name="email" onChange={onChange} />
-          <PasswordInput
-            placeholder="Пароль"
-            value={form.password}
-            name="password"
-            onChange={onChange}
-          />
-          <Button onClick={handleSubmit} htmlType="button" type="secondary">
+    <div className={loginPageStyles.container}>
+      <form className={loginPageStyles.form}>
+        <h2 className={loginPageStyles.heading}>Вход</h2>
+        <EmailInput placeholder="Email" value={form.email} name="email" onChange={onChange} />
+        <PasswordInput
+          placeholder="Пароль"
+          value={form.password}
+          name="password"
+          onChange={onChange}
+        />
+        <div className={loginPageStyles.button}>
+          <Button onClick={handleSubmit} htmlType="button" type="primary" size="medium">
             Войти
           </Button>
-          <p>Вы новый пользователь?<NavLink to="/register">Зарегистрироваться</NavLink></p>
-          <p>Забыли пароль?<NavLink to="/forgot-password">Восстановить пароль</NavLink></p>
-        </form>
+        </div>
+      </form>
+      <div className={loginPageStyles.links}>
+        <p className="text text_type_main-default text_color_inactive">Вы - новый пользователь?<NavLink to="/register" className={loginPageStyles.link}>Зарегистрироваться</NavLink></p>
+        <p className="text text_type_main-default text_color_inactive">Забыли пароль?<NavLink to="/forgot-password" className={loginPageStyles.link}>Восстановить пароль</NavLink></p>
       </div>
     </div>
   );

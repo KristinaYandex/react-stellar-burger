@@ -1,7 +1,7 @@
 import { CREATE_USER_FEED, CREATE_USER_SUCCESS, CREATE_USER_FAILED } from "../actions/register";
   
 let initialState = {
-  user: null,
+  /*user: null,*/
   createUserRequest: false,
   createUserFailed: false,
 }

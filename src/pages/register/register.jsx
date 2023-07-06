@@ -32,23 +32,25 @@ export function RegisterPage() {
   }
 
   return (
-    <div className={registerPageStyles.wrapper}>
-      <div className={registerPageStyles.container}>
-        <form className={registerPageStyles.form}>
-          <h1 className={registerPageStyles.heading}>Регистрация</h1>
-          <Input placeholder="Имя" value={form.name} name="name" onChange={onChange} />
-          <EmailInput placeholder="Email" value={form.email} name="email" onChange={onChange} />
-          <PasswordInput
-            placeholder="Пароль"
-            value={form.password}
-            name="password"
-            onChange={onChange}
-          />
-          <Button onClick={handleSubmit} primary={true}>
+    <div className={registerPageStyles.container}>
+      <form className={registerPageStyles.form}>
+        <h2 className={registerPageStyles.heading}>Регистрация</h2>
+        <Input placeholder="Имя" value={form.name} name="name" onChange={onChange} />
+        <EmailInput placeholder="Email" value={form.email} name="email" onChange={onChange} />
+        <PasswordInput
+          placeholder="Пароль"
+          value={form.password}
+          name="password"
+          onChange={onChange}
+        />
+        <div className={registerPageStyles.button}>
+          <Button onClick={handleSubmit} htmlType="button" type="primary" size="medium">
             Зарегистрироваться
           </Button>
-          <p>Уже зарегистрированы?<NavLink to="/login">Войти</NavLink></p>
-        </form> 
+        </div>
+      </form> 
+      <div className={registerPageStyles.links}>
+        <p className="text text_type_main-default text_color_inactive">Уже зарегистрированы?<NavLink to="/login" className={registerPageStyles.link}>Войти</NavLink></p>
       </div>
     </div>
   );

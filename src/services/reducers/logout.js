@@ -1,8 +1,6 @@
 import { LOGOUT_FEED, LOGOUT_SUCCESS, LOGOUT_FAILED } from "../actions/logout";
   
 let initialState = {
-  email: action.user.email,
-  name: action.user.name,
   logoutRequest: false,
   logoutFailed: false,
 }
@@ -19,8 +17,7 @@ export const loginReducer = (state = initialState, action) => {
     case LOGOUT_SUCCESS: {
       return { 
         ...state, 
-        email: null,
-        name: null,
+        user: null,
         logoutRequest: false,
         logoutFailed: false,
       };

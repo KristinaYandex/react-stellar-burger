@@ -1,5 +1,6 @@
 import { logOutOfSystem } from "../../utils/api";
 import { deleteCookie } from "../../utils/cookie";
+import { GET_USER_SUCCESS } from "./get-user";
   
 export const LOGOUT_FEED = "LOGOUT_FEED";
 export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
@@ -13,12 +14,15 @@ export function logOutFeed(onSuccess) {
     logOutOfSystem() 
       .then((res) => {
         if (res && res.success) {
-          deleteCookie("token");
-          localStorage.removeItem("refreshToken");
+          localStorage.removeItem('refreshToken');
+          deleteCookie('token');
           dispatch({
             type: LOGOUT_SUCCESS,
           })
-          console.debug("logout success!")
+          dispatch({
+            type: GET_USER_SUCCESS,
+            user: null
+          })
           onSuccess()
         } else {
                 // Если произошла ошибка, отправляем соответствующий экшен
