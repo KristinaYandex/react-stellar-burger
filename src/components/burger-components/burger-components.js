@@ -3,18 +3,13 @@ import burgerComponents from "./burger-components.module.css";
 import IngredientBurger from "../ingredient-burger/ingredient-burger";
 import {ingredientPropType} from "../../utils/prop-types"
 import PropTypes from "prop-types";
-import { useDispatch } from "react-redux";
-import { visibleIngredient } from "../../services/actions/ingredient-details";
 import { useHistory } from 'react-router-dom';
 
 const BurgerComponents = forwardRef(({ingredients}, ref) => {
-  const dispatch = useDispatch();
   const history = useHistory();
 
   const openModal = (item) => {
-    dispatch(visibleIngredient(item));
-    history.push(`/ingredients/${item._id}`);
-    console.log("!");
+    history.replace(`/ingredients/${item._id}`, {background: true})
   }
 
   return (

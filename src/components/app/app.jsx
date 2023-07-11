@@ -15,7 +15,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getIngredientsFeed } from "../../services/actions/burger-ingredients";
 import { getUserFeed } from "../../services/actions/get-user";
 import PrivateRoute, { RouteTypes } from "../private-route/private-route";
-import { closeIngredient } from "../../services/actions/ingredient-details";
 
 function App() {
   const dispatch = useDispatch();
@@ -31,8 +30,7 @@ function App() {
   const user = useSelector(getUser);
 
   const closeModal = () => {
-    dispatch(closeIngredient());
-    history.goBack();
+    history.push("/")
   }
   
   useEffect(() => {
@@ -93,13 +91,15 @@ function App() {
           </Route>
         </Switch>
       )}
-      {background && 
-        <Route path="/ingredients/:id">
-          <Modal onClose={closeModal} title="Детали ингредиента">
-            <IngredientDetails /> 
-          </Modal>
-        </Route>
-      }
+      {background && (
+        <Switch>
+          <Route path="/ingredients/:id">
+            <Modal onClose={closeModal} title="Детали ингредиента">
+              <IngredientDetails /> 
+            </Modal>
+          </Route>
+        </Switch>
+      )}
     </div>
   );
 }

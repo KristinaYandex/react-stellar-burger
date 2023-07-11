@@ -1,10 +1,15 @@
 import ingredientDetailsStyle from "./ingredient-details.module.css";
-import { useSelector } from "react-redux";
+import { useSelector } from 'react-redux';
+import { useParams } from "react-router-dom";
 
 export default function IngredientDetails() {
+  const {id} = useParams();
 
-  const getIngredient = (store) => store.ingredientDetailsReducer.ingredientDetails;
-  const ingredient = useSelector(getIngredient);
+  const getBurgerIngredients = (store) => store.burgerIngredientsReducer.ingredients;
+  const burgerIngredients = useSelector(getBurgerIngredients);
+  const ingredient = burgerIngredients?.find((item) => item._id === id);
+
+  if (!ingredient) return null
 
   return (
     <div className={ingredientDetailsStyle.container}>

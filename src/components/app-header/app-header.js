@@ -1,35 +1,39 @@
 import { Logo, BurgerIcon, ListIcon, ProfileIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import appHeaderStyles from "./app-header.module.css";
-import { NavLink  } from "react-router-dom";
+import { NavLink, useRouteMatch  } from "react-router-dom";
 
 function AppHeader() {
+
+  const mainLink = useRouteMatch("/");
+  const profileLink = useRouteMatch("/profile");
+  const orderLink = useRouteMatch("/orders");
 
   return (
     <header>
       <div className={appHeaderStyles.header}>
-        <nav className={appHeaderStyles.header_menu}>
-          <ul className={appHeaderStyles.header_list}>
+        <nav className={appHeaderStyles.header__menu}>
+          <ul className={appHeaderStyles.header__list}>
             <li>
-              <a href="#" className={appHeaderStyles.header_link}>
-              <BurgerIcon type="primary" />
-              <p className="text text_type_main-default text_color_primary">Конструктор</p>
-              </a>
+              <NavLink exact={true} to="/" className={appHeaderStyles.header__link} activeClassName={appHeaderStyles.link_active}>
+                <BurgerIcon type={mainLink.isExact ? "primary" : "secondary"} />
+                <p className="text text_type_main-default">Конструктор</p>
+              </NavLink>
             </li>
             <li>
-              <a href="#" className={appHeaderStyles.header_link}>
-                <ListIcon type="secondary" />
-                <p className="text text_type_main-default text_color_inactive">Лента заказов</p>
-              </a>
+              <NavLink to="/orders" className={appHeaderStyles.header__link} activeClassName={appHeaderStyles.link_active}>
+                <ListIcon type={orderLink ? "primary" : "secondary"} />
+                <p className="text text_type_main-default">Лента заказов</p>
+              </NavLink>
             </li>
           </ul>
         </nav>
-        <div className={appHeaderStyles.header_logo}>
+        <div className={appHeaderStyles.header__logo}>
           <Logo /> 
         </div>
         <nav>
-          <NavLink to="/profile" className={appHeaderStyles.header_link} activeClassName={appHeaderStyles.active}>
-            <ProfileIcon type="secondary" />
-            <p className="text text_type_main-default text_color_inactive">Личный кабинет</p>
+          <NavLink to="/profile" className={appHeaderStyles.header__link} activeClassName={appHeaderStyles.link_active}>
+            <ProfileIcon type={profileLink ? "primary" : "secondary"} />
+            <p className="text text_type_main-default">Личный кабинет</p>
           </NavLink>
         </nav>
       </div>

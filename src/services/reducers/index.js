@@ -22,7 +22,7 @@ export const rootReducer = combineReducers({
    registerReducer: registerReducer,
    loginReducer: loginReducer,
    updateTokenReducer: updateTokenReducer, 
-   getUserReducer : getUserReducer,
+   getUserReducer: getUserReducer,
    updateUserReducer: updateUserReducer
 })
 
