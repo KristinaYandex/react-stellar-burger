@@ -16,3 +16,7 @@
 .text {
   text-align: center;
 }
+
+.counter {
+  display: none;
+}
