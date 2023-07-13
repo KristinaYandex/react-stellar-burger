@@ -1,5 +1,6 @@
 import {Redirect, useLocation} from "react-router-dom"; 
 import { useSelector } from 'react-redux';
+import { getUser, getIsAuthChecked} from "../../services/selectors/get-user";
 
 function ProtectedRoute(props) {
   const {
@@ -9,9 +10,7 @@ function ProtectedRoute(props) {
 
   const location = useLocation(); 
 
-  const getUser = (store) => store.getUserReducer.user;
   const user = useSelector(getUser);
-  const getIsAuthChecked = (store) => store.getUserReducer.isAuthChecked;
   const isAuthChecked = useSelector(getIsAuthChecked);
 
   if (!isAuthChecked) {
