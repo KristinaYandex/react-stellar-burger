@@ -13,6 +13,7 @@ export const getUserReducer = (state = initialState, action) => {
         ...state,
         getUserRequest: true, //Запрос начал выполняться
         getUserFailed: false, //Статус наличия ошибок
+        isAuthChecked: false,
       };
     }
     case GET_USER_SUCCESS: {
@@ -21,13 +22,15 @@ export const getUserReducer = (state = initialState, action) => {
         user: action.user,
         getUserRequest: false,
         getUserFailed: false,
+        isAuthChecked: true,
       };
     }
     case GET_USER_FAILED: {
       return { 
         ...state, 
         getUserRequest: false, 
-        getUserFailed: true
+        getUserFailed: true,
+        isAuthChecked: true,
       };
     }
     default: {

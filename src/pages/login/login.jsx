@@ -32,7 +32,7 @@ export function LoginPage() {
 
   return (
     <div className={loginPageStyles.container}>
-      <form className={loginPageStyles.form}>
+      <form className={loginPageStyles.form} onSubmit={handleSubmit}>
         <h2 className={loginPageStyles.heading}>Вход</h2>
         <EmailInput placeholder="Email" value={form.email} name="email" onChange={onChange} />
         <PasswordInput
@@ -42,7 +42,7 @@ export function LoginPage() {
           onChange={onChange}
         />
         <div className={loginPageStyles.button}>
-          <Button onClick={handleSubmit} htmlType="button" type="primary" size="medium">
+          <Button htmlType="submit" type="primary" size="medium">
             Войти
           </Button>
         </div>

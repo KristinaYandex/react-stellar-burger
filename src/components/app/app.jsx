@@ -14,7 +14,9 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getIngredientsFeed } from "../../services/actions/burger-ingredients";
 import { getUserFeed } from "../../services/actions/get-user";
-import PrivateRoute, { RouteTypes } from "../private-route/private-route";
+import ProtectedRoute from "../protected-route/protected-route";
+import { getIngredients, getIngredientsRequest, getIngredientsFailed } from "../../services/selectors/burger-ingredients";
+import { getUser } from "../../services/selectors/login";
 
 function App() {
   const dispatch = useDispatch();
@@ -23,10 +25,9 @@ function App() {
   
   const background = location.state && location.state.background;
 
-  const getBurgerIngredients = (store) => store.burgerIngredientsReducer;
-  const {ingredients, ingredientsRequest, ingredientsError } = useSelector(getBurgerIngredients);
-
-  const getUser = (store) => store.loginReducer.user;
+  const ingredients = useSelector(getIngredients);
+  const ingredientsRequest = useSelector(getIngredientsRequest);
+  const ingredientsFailed  = useSelector(getIngredientsFailed);
   const user = useSelector(getUser);
 
   const closeModal = () => {
@@ -35,6 +36,7 @@ function App() {
   
   useEffect(() => {
     dispatch(getIngredientsFeed());
+    dispatch(getUserFeed());
   }, [dispatch]);
 
   useEffect(() => {
@@ -43,45 +45,41 @@ function App() {
     }
   }, [user]);
 
-  useEffect(() => {
-    dispatch(getUserFeed());
-  }, []);
-
   return (
     <div className={styles.app}>
       <AppHeader />
-      {ingredientsRequest && !ingredientsError && (
+      {ingredientsRequest && !ingredientsFailed && (
         <h2>Загрузка...</h2>
       )}
-      {!ingredientsRequest && ingredientsError && (
+      {!ingredientsRequest && ingredientsFailed && (
         <h2>Не удалось получить данные</h2>
       )}
-      {!ingredientsRequest && !ingredientsError && ingredients.length && (
+      {!ingredientsRequest && !ingredientsFailed && ingredients.length && (
         <Switch location={background || location}>
           <Route path="/profile">
-            <PrivateRoute>
+            <ProtectedRoute>
               <ProfilePage />
-            </PrivateRoute>
+            </ProtectedRoute>
           </Route>
           <Route path="/login">
-            <PrivateRoute type={RouteTypes.needLogOut}>
+            <ProtectedRoute onlyUnAuth>
               <LoginPage />
-            </PrivateRoute>
+            </ProtectedRoute>
           </Route>
           <Route path="/register">
-            <PrivateRoute type={RouteTypes.needLogOut}>
+            <ProtectedRoute onlyUnAuth>
               <RegisterPage />
-            </PrivateRoute>
+            </ProtectedRoute>
           </Route>
           <Route path="/forgot-password">
-            <PrivateRoute type={RouteTypes.needLogOut}>
+            <ProtectedRoute onlyUnAuth>
               <ForgotPasswordPage />
-            </PrivateRoute>
+            </ProtectedRoute>
           </Route>
           <Route path="/reset-password">
-            <PrivateRoute type={RouteTypes.needLogOut}>
+            <ProtectedRoute onlyUnAuth>
               <ResetPasswordPage />
-            </PrivateRoute>
+            </ProtectedRoute>
           </Route>
           <Route path="/ingredients/:id">
             <IngredientDetailsPage />

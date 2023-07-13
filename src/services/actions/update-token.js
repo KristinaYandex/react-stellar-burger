@@ -13,8 +13,8 @@ export function updateTokenFeed() {
     updateToken() 
       .then((res) => {
         if (res && res.success) {
-          setCookie("token", res.accessToken);
-          localStorage.setItem("token", res.refreshToken);
+          setCookie("accessToken", res.accessToken.split('Bearer ')[1]);
+          localStorage.setItem("refreshToken", res.refreshToken);
           dispatch({
             type: UPDATE_TOKEN_SUCCESS
           })

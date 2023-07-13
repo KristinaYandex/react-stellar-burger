@@ -5,17 +5,16 @@ import ingredientBurgerStyle from "./ingredient-burger.module.css";
 import {ingredientPropType} from "../../utils/prop-types.js";
 import PropTypes from "prop-types";
 import { useDrag } from "react-dnd";
+import { getBun, getMainAndSauce } from "../../services/selectors/burger-constructor";
 
 const IngredientBurger = ({ingredient, onClick}) => {
 
   const [, dragRef] = useDrag({
     type: "ingredient",
     item: ingredient
-})
+  })
 
-  const getBun = (store) => store.burgerConstructorReducer.bun;
   const bun = useSelector(getBun);
-  const getMainAndSauce = (store) => store.burgerConstructorReducer.mainAndSauce;
   const mainAndSauce = useSelector(getMainAndSauce);
 
   const counterMainAndSauce = useMemo(() => {

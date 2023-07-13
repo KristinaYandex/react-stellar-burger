@@ -18,7 +18,8 @@ export function postIngredients(arrayIngredients) {
   return fetch(`${URL}/orders`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      authorization: 'Bearer ' + getCookie('accessToken')
     },
     body: JSON.stringify ({
       ingredients: arrayIngredients
@@ -71,7 +72,8 @@ export function authorizationUser(emailUser, passwordUser) {
   return fetch(`${URL}/auth/login`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      authorization: 'Bearer ' + getCookie('accessToken')
     },
     body: JSON.stringify({
       email: emailUser,
@@ -112,7 +114,7 @@ export function getUser() {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      authorization: getCookie('token')
+      authorization: 'Bearer ' + getCookie('accessToken')
     },
   })
   .then(res => serverResponse(res))
@@ -123,7 +125,7 @@ export function updateUser(emailUser, nameUser) {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
-      authorization: getCookie('token')
+      authorization: 'Bearer ' + getCookie('accessToken')
     },
     body: JSON.stringify({
       email: emailUser,

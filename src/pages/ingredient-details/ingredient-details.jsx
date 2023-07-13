@@ -6,7 +6,7 @@ export function IngredientDetailsPage() {
   return (
     <main>
       <div>
-        <h2 className={ingredientDetailsStyle.heading}>Детали ингредиента</h2>
+        <h2 className={`${ingredientDetailsStyle.heading} text text_type_main-large`}>Детали ингредиента</h2>
         <IngredientDetails />
       </div>
     </main>

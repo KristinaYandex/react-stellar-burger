@@ -1,5 +1,4 @@
 import { getUser } from "../../utils/api";
-import { updateTokenFeed } from "../../services/actions/update-token";
   
 export const GET_USER_FEED = "GET_USER_FEED";
 export const GET_USER_SUCCESS = "GET_USER_SUCCESS";
@@ -25,14 +24,9 @@ export function getUserFeed() {
         }
       })
       .catch(() => {
-        if (localStorage.getItem("refreshToken")) {
-          dispatch(updateTokenFeed());
-          dispatch(getUserFeed());
-        } else {
-          dispatch({
-            type: GET_USER_FAILED
-          })
-        }
+        dispatch({
+          type: GET_USER_FAILED
+        })
       })
   }
 } 

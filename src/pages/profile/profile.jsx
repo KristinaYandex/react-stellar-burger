@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logOutFeed } from "../../services/actions/logout";
 import { updateUserFeed } from "../../services/actions/update-user";
 import { useHistory, NavLink } from "react-router-dom";
+import { useEffect } from 'react';
 
 export function ProfilePage() {
   const dispatch = useDispatch();
@@ -19,17 +20,16 @@ export function ProfilePage() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const updateUser = (e) => {
-    e.preventDefault();
+  useEffect(() => {
     dispatch(updateUserFeed(form.email, form.name));
-  }
+  }, [dispatch, form.email, form.name]);
 
   const resetUser = (e) => {
     e.preventDefault();
     setForm({ name: user.name, email: user.email, password: '' });
   }
 
-  const isFormChanged = form.name !== user?.name || form.email !== user?.email || form.password;
+  const isFormChanged = form.name !== user.name || form.email !== user.email || form.password;
 
   const onLogout = (e) => {
     e.preventDefault();
@@ -54,7 +54,7 @@ export function ProfilePage() {
         </Button>
         <p className="text text_type_main-default text_color_inactive">В этом разделе вы можете изменить свои персональные данные</p>
       </nav>
-      <form className={profilePageStyles.form}>
+      <form className={profilePageStyles.form} /*onSubmit={updateUser}*/>
         <Input placeholder="Имя" value={form.name} name="name" onChange={onChange} icon="EditIcon"/>
         <EmailInput placeholder="Логин" value={form.email} name="email" onChange={onChange} icon="EditIcon"/>
         <PasswordInput
@@ -66,7 +66,7 @@ export function ProfilePage() {
         />
         {isFormChanged ? (
           <div>
-            <Button onClick={updateUser} htmlType="submit" type="primary">
+            <Button htmlType="submit" type="primary">
               Сохранить
             </Button>
             <Button onClick={resetUser} type="secondary" htmlType="button">

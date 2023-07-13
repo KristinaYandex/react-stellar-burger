@@ -27,11 +27,11 @@ export function ForgotPasswordPage() {
 
   return (
     <div className={forgotPasswordStyles.container}>
-      <form className={forgotPasswordStyles.form}>
+      <form className={forgotPasswordStyles.form} onSubmit={onForgotPassword}>
         <h2 className={forgotPasswordStyles.heading}>Восстановление пароля</h2>
         <EmailInput placeholder="Укажите e-mail" value={form.email} name="email" onChange={onChange} />
         <div className={forgotPasswordStyles.button}>
-          <Button onClick={onForgotPassword} htmlType="button" type="primary" size="medium">
+          <Button htmlType="submit" type="primary" size="medium">
             Восстановить
           </Button>
         </div>

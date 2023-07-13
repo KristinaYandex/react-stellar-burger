@@ -13,19 +13,15 @@ const BurgerComponents = forwardRef(({ingredients}, ref) => {
   }
 
   return (
-    <>
-      <div className={burgerComponents.ingredient_list} ref={ref}>
-        {ingredients.map((ingredient) => (
-          <IngredientBurger 
-            key={ingredient._id} 
-            ingredient={ingredient} 
-            onClick={() => {
-              openModal(ingredient)
-            }} 
-          />
-        ))}
-      </div>
-    </>
+    <div className={burgerComponents.ingredient_list} ref={ref}>
+      {ingredients.map((ingredient) => (
+        <IngredientBurger 
+          key={ingredient._id} 
+          ingredient={ingredient} 
+          onClick={() => openModal(ingredient)} 
+        />
+      ))}
+    </div>
   );
 })
 

@@ -1,13 +1,16 @@
-import { NavLink, useHistory } from 'react-router-dom';
+import { NavLink, useHistory, Redirect } from 'react-router-dom';
 import resetPasswordStyles from './reset-password.module.css';
 import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
-import { resetPasswordFeed, RESET_PASSWORD_FEED, RESET_PASSWORD_SUCCESS, RESET_PASSWORD_FAILED } from '../../services/actions/reset-password';
+import { resetPasswordFeed } from '../../services/actions/reset-password';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react'; 
+import { getUser } from "../../services/selectors/login";
 
 export function ResetPasswordPage() {
   const dispatch = useDispatch();
   const history = useHistory();
+
+  const user = useSelector(getUser);
 
   const getResetPasswordStatus = (store) => ({
     resetPasswordRequest: store.resetPasswordReducer.resetPasswordRequest,
@@ -27,6 +30,14 @@ export function ResetPasswordPage() {
     if (!resetPasswordRequest && !resetPasswordFailed) {
       history.push('/login')
     }
+  }
+
+  if (user) {
+    return <Redirect to={"/"} />
+  }
+
+  if (!user) {
+    return <Redirect to={"/forgot-password"} />
   }
 
   return (

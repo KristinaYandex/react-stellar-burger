@@ -9,7 +9,6 @@ let initialState = {
 export const orderDetailsReducer = (state = initialState, action) => {
   switch (action.type) {
     case CREATE_ORDER_FEED: {
-      console.debug("action:", action)
       return {
         ...state,
         orderDetailsRequest: true, //Запрос начал выполняться

@@ -3,7 +3,7 @@ import { AUTHORIZATION_USER_FEED, AUTHORIZATION_USER_SUCCESS, AUTHORIZATION_USER
 let initialState = {
   user: null,
   authorizationUserRequest: false,
-  authorizationUserFailed: false,
+  authorizationUserFailed: false
 }
 
 export const loginReducer = (state = initialState, action) => {
@@ -20,7 +20,7 @@ export const loginReducer = (state = initialState, action) => {
         ...state, 
         user: action.user,
         authorizationUserRequest: false,
-        authorizationUserFailed: false,
+        authorizationUserFailed: false
       };
     }
     case AUTHORIZATION_USER_FAILED: {

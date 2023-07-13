@@ -15,7 +15,7 @@ export function logOutFeed(onSuccess) {
       .then((res) => {
         if (res && res.success) {
           localStorage.removeItem('refreshToken');
-          deleteCookie('token');
+          deleteCookie('accessToken');
           dispatch({
             type: LOGOUT_SUCCESS,
           })

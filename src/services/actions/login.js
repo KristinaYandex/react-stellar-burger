@@ -13,7 +13,7 @@ export function authorizationFeed(emailUser, passwordUser) {
     authorizationUser(emailUser, passwordUser) 
       .then((res) => {
         if (res && res.success) {
-          setCookie("token", res.accessToken);
+          setCookie("accessToken", res.accessToken.split('Bearer ')[1]);
           localStorage.setItem("refreshToken", res.refreshToken);
           dispatch({
             type: AUTHORIZATION_USER_SUCCESS,

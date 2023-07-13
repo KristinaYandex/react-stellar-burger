@@ -31,6 +31,5 @@ export function getCookie(name) {
 export function deleteCookie(name) {
   // Находим куку по ключу token, удаляем её значение, 
   // устанавливаем отрицательное время жизни, чтобы удалить сам ключ token
-  console.log('Удалена кука:', name)
   setCookie(name, null, { expires: -1 });
 } 

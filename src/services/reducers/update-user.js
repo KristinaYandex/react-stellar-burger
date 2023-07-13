@@ -3,7 +3,7 @@ import { UPDATE_USER_FEED, UPDATE_USER_SUCCESS, UPDATE_USER_FAILED } from "../ac
 let initialState = {
   user: null,
   updateUserRequest: false,
-  updateUserFailed: false,
+  updateUserFailed: false
 }
 
 export const updateUserReducer = (state = initialState, action) => {
@@ -20,7 +20,7 @@ export const updateUserReducer = (state = initialState, action) => {
         ...state, 
         user: action.user,
         updateUserRequest: false,
-        updateUserFailed: false,
+        updateUserFailed: false
       };
     }
     case UPDATE_USER_FAILED: {

@@ -10,28 +10,24 @@ import { useDrop } from "react-dnd";
 import { ADD_INGREDIENT, DELETE_INGREDIENT, addIngredient, deleteIngredient, sortIngredient } from "../../services/actions/burger-constructor";
 import { useDispatch, useSelector } from "react-redux";
 import ConstructorIngredient from "../constructor-ingredient/constructor-ingredient";
+import { getBun, getMainAndSauce } from "../../services/selectors/burger-constructor";
+import { getUser } from "../../services/selectors/get-user";
 
 function BurgerConstructor() {
     const [isOpen, setIsOpen] = useState(false);
     const dispatch = useDispatch();
     const history = useHistory();
-
-    const getallIngredients = (store) => ({
-      bun: store.burgerConstructorReducer.bun,
-      mainAndSauce: store.burgerConstructorReducer.mainAndSauce
-    })
  
-    const {bun, mainAndSauce} = useSelector(getallIngredients);
-
-    const getUser = (store) => store.getUserReducer.user;
+    const bun = useSelector(getBun);
+    const mainAndSauce = useSelector(getMainAndSauce);
     const user = useSelector(getUser);
     
     const idIngredients = mainAndSauce.map((item) => item._id); /*Id ингредиентов*/
 
     const openModal = () =>  {
       setIsOpen(true);
-      const bunAndMainSauce = [...idIngredients, bun._id];
-      dispatch(createOrderFeed(bunAndMainSauce));
+      const mainAndSauceAndBunId = [bun._id, ...idIngredients, bun._id]; /*Id ингредиентов с булками*/
+      dispatch(createOrderFeed(mainAndSauceAndBunId));
     }
 
     const closeModal = () => {

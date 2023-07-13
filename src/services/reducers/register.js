@@ -2,7 +2,7 @@ import { CREATE_USER_FEED, CREATE_USER_SUCCESS, CREATE_USER_FAILED } from "../ac
   
 let initialState = {
   createUserRequest: false,
-  createUserFailed: false,
+  createUserFailed: false
 }
 
 export const registerReducer = (state = initialState, action) => {
@@ -19,7 +19,7 @@ export const registerReducer = (state = initialState, action) => {
         ...state, 
         user: action.user,
         createUserRequest: false,
-        createUserFailed: false,
+        createUserFailed: false
       };
     }
     case CREATE_USER_FAILED: {
