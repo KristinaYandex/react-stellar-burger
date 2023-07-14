@@ -5,12 +5,14 @@ import { resetPasswordFeed } from '../../services/actions/reset-password';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react'; 
 import { getUser } from "../../services/selectors/login";
+import { getSuccess } from "../../services/selectors/forgot-password";
 
 export function ResetPasswordPage() {
   const dispatch = useDispatch();
   const history = useHistory();
 
   const user = useSelector(getUser);
+  const success = useSelector(getSuccess);
 
   const getResetPasswordStatus = (store) => ({
     resetPasswordRequest: store.resetPasswordReducer.resetPasswordRequest,
@@ -36,8 +38,8 @@ export function ResetPasswordPage() {
     return <Redirect to={"/"} />
   }
 
-  if (!user) {
-    return <Redirect to={"/forgot-password"} />
+  if (!success) {
+    return (<Redirect to={"/forgot-password"} />)
   }
 
   return (

@@ -54,7 +54,7 @@ export function ProfilePage() {
         </Button>
         <p className="text text_type_main-default text_color_inactive">В этом разделе вы можете изменить свои персональные данные</p>
       </nav>
-      <form className={profilePageStyles.form} /*onSubmit={updateUser}*/>
+      <form className={profilePageStyles.form} onSubmit={resetUser}>
         <Input placeholder="Имя" value={form.name} name="name" onChange={onChange} icon="EditIcon"/>
         <EmailInput placeholder="Логин" value={form.email} name="email" onChange={onChange} icon="EditIcon"/>
         <PasswordInput
@@ -69,7 +69,7 @@ export function ProfilePage() {
             <Button htmlType="submit" type="primary">
               Сохранить
             </Button>
-            <Button onClick={resetUser} type="secondary" htmlType="button">
+            <Button htmlType="submit" type="secondary">
               Отмена
             </Button>
           </div>

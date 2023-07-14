@@ -1,0 +1,1 @@
+export const getSuccess = (store) => store.forgotPasswordReducer.success;

@@ -3,6 +3,7 @@ import { FORGOT_PASSWORD_FEED, FORGOT_PASSWORD_SUCCESS, FORGOT_PASSWORD_FAILED }
 let initialState = {
   forgotPasswordRequest: false,
   forgotPasswordFailed: false,
+  success: false
 }
 
 export const forgotPasswordReducer = (state = initialState, action) => {
@@ -17,8 +18,9 @@ export const forgotPasswordReducer = (state = initialState, action) => {
     case FORGOT_PASSWORD_SUCCESS: {
       return { 
         ...state, 
+        success: true,
         forgotPasswordRequest: false,
-        forgotPasswordFailed: false,
+        forgotPasswordFailed: false
       };
     }
     case FORGOT_PASSWORD_FAILED: {

@@ -1,4 +1,5 @@
 import { getCookie } from "../utils/cookie";
+import { setCookie } from "../utils/cookie";
 
 const URL = "https://norma.nomoreparties.space/api";
 
@@ -9,13 +10,35 @@ function serverResponse(res) {
   return Promise.reject(`Ошибка: ${res.status}`);
 }
 
+/*Отдельный запрос, проверяет истёк ли токен. Обрабатывает ошибки запросов и при возникновении ошибки jwt expired и вызывает обновление токена*/ 
+export const fetchWithRefresh = async (url, options) => {
+  try {
+    const res = await fetch(url, options);
+    return await serverResponse(res);
+  } catch (err) {
+    if (err.message === 'jwt expired') {
+      const refreshData = await updateToken();
+      if (!refreshData.success) {
+        Promise.reject(refreshData);
+      }
+      localStorage.setItem('refreshToken', refreshData.refreshToken);
+      setCookie('accessToken', refreshData.accessToken);
+      options.headers.authorization = refreshData.accessToken;
+      const res = await fetch(url, options);
+      return await serverResponse(res);
+    } else {
+      return Promise.reject(err);
+    }
+  }
+};
+
 export function getIngredients() {
   return fetch(`${URL}/ingredients`)
   .then(res => serverResponse(res))
 }
 
 export function postIngredients(arrayIngredients) {
-  return fetch(`${URL}/orders`, {
+  return fetchWithRefresh(`${URL}/orders`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -25,7 +48,6 @@ export function postIngredients(arrayIngredients) {
       ingredients: arrayIngredients
     })
   })
-  .then(res => serverResponse(res))
 }
 
 export function forgotPassword(emailUser) {
@@ -69,7 +91,7 @@ export function createUser(emailUser, passwordUser, nameUser) {
 }
 
 export function authorizationUser(emailUser, passwordUser) {
-  return fetch(`${URL}/auth/login`, {
+  return fetchWithRefresh(`${URL}/auth/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -80,7 +102,6 @@ export function authorizationUser(emailUser, passwordUser) {
       password: passwordUser
     })
   })
-  .then(res => serverResponse(res))
 }
 
 export function updateToken() {
@@ -110,18 +131,17 @@ export function logOutOfSystem() {
 }
 
 export function getUser() {
-  return fetch(`${URL}/auth/user`, {
+  return fetchWithRefresh(`${URL}/auth/user`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
       authorization: 'Bearer ' + getCookie('accessToken')
     },
   })
-  .then(res => serverResponse(res))
 }
 
 export function updateUser(emailUser, nameUser) {
-  return fetch(`${URL}/auth/user`, {
+  return fetchWithRefresh(`${URL}/auth/user`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
@@ -132,5 +152,4 @@ export function updateUser(emailUser, nameUser) {
       name: nameUser,
     })
   })
-  .then(res => serverResponse(res))
 }

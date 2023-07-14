@@ -33,7 +33,7 @@ export function RegisterPage() {
 
   return (
     <div className={registerPageStyles.container}>
-      <form className={registerPageStyles.form}>
+      <form className={registerPageStyles.form} onSubmit={handleSubmit}>
         <h2 className={registerPageStyles.heading}>Регистрация</h2>
         <Input placeholder="Имя" value={form.name} name="name" onChange={onChange} />
         <EmailInput placeholder="Email" value={form.email} name="email" onChange={onChange} />
@@ -44,7 +44,7 @@ export function RegisterPage() {
           onChange={onChange}
         />
         <div className={registerPageStyles.button}>
-          <Button onClick={handleSubmit} htmlType="button" type="primary" size="medium">
+          <Button htmlType="submit" type="primary" size="medium">
             Зарегистрироваться
           </Button>
         </div>
