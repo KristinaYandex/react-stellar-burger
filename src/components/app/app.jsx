@@ -10,6 +10,7 @@ import { LoginPage } from "../../pages/login/login";
 import { RegisterPage } from "../../pages/register/register";
 import { ProfilePage } from "../../pages/profile/profile";
 import { ResetPasswordPage } from "../../pages/reset-password/reset-password";
+import { OrderFeedPage } from "../../pages/feed/feed";
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getIngredientsFeed } from "../../services/actions/burger-ingredients";
@@ -43,7 +44,7 @@ function App() {
     if (user) {
       dispatch(getUserFeed());
     }
-  }, [user]);
+  }, [dispatch, user]);
 
   return (
     <div className={styles.app}>
@@ -83,6 +84,9 @@ function App() {
           </Route>
           <Route path="/ingredients/:id">
             <IngredientDetailsPage />
+          </Route>
+          <Route path="/feed">
+            <OrderFeedPage />
           </Route>
           <Route exact={true} path="/">
             <BurgerConstructorPage />
