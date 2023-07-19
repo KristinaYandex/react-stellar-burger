@@ -1,4 +1,17 @@
+.mainPage {
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+  column-gap: 60px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
 .heading {
-  /*font-size: 36px;*/
-  text-align: center;
+  text-align: left;
+  padding-left: 250px;
+}
+
+.section {
+  padding-top: 40px;
 }

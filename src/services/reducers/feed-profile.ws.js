@@ -1,30 +1,28 @@
-import { WS_CONNECTION_SUCCESS, WS_CONNECTION_CLOSED, WS_GET_FEED_MESSAGE, WS_CONNECTION_ERROR } from "../../services/actions/feed.ws";
+import { WS_PROFILE_CONNECTION_ERROR, WS_PROFILE_CONNECTION_SUCCESS, WS_PROFILE_CONNECTION_CLOSED, WS_PROFILE_GET_FEED_MESSAGE } from "../../services/actions/feed.ws";
 
 const initialState = {
   wsConnected: false,
   orders: [],
-  error: undefined,
-  total: null,
-  totalToday: null
+  error: undefined
 };
   
 export const feedReducer = (state = initialState, action) => {
   switch (action.type) {
-    case WS_CONNECTION_SUCCESS:
+    case WS_PROFILE_CONNECTION_SUCCESS:
       return {
         ...state,
         error: undefined,
         wsConnected: true
       };
   
-    case WS_CONNECTION_ERROR:
+    case WS_PROFILE_CONNECTION_ERROR:
       return {
         ...state,
         error: action.payload,
         wsConnected: false
       };
   
-    case WS_CONNECTION_CLOSED:
+    case WS_PROFILE_CONNECTION_CLOSED:
       return {
         ...state,
         wsConnected: false,
@@ -32,7 +30,7 @@ export const feedReducer = (state = initialState, action) => {
       };
           // Обработка происходит, когда с сервера возвращаются данные
           // В orders передадим данные, которые пришли с сервера
-    case WS_GET_FEED_MESSAGE:
+    case WS_PROFILE_GET_FEED_MESSAGE:
       return {
         ...state,
         error: undefined,

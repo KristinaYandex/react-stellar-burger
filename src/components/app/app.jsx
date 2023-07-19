@@ -2,6 +2,7 @@ import { Switch, Route, useLocation, useHistory } from 'react-router-dom';
 import styles from "./app.module.css";
 import AppHeader from "../app-header/app-header";
 import IngredientDetails from "../ingredient-details/ingredient-details";
+import OrderDetails from "../feed-order-details/feed-order-details";
 import Modal from "../modal/modal";
 import { ForgotPasswordPage } from "../../pages/forgot-password/forgot-password";
 import { BurgerConstructorPage } from "../../pages/constructor-burger/constructor-burger";
@@ -11,6 +12,7 @@ import { RegisterPage } from "../../pages/register/register";
 import { ProfilePage } from "../../pages/profile/profile";
 import { ResetPasswordPage } from "../../pages/reset-password/reset-password";
 import { OrderFeedPage } from "../../pages/feed/feed";
+import { OrderDetailsPage } from "../../pages/details-feed/details-feed";
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getIngredientsFeed } from "../../services/actions/burger-ingredients";
@@ -88,6 +90,9 @@ function App() {
           <Route path="/feed">
             <OrderFeedPage />
           </Route>
+          <Route path="/feed/:id">
+            <OrderDetailsPage />
+          </Route>
           <Route exact={true} path="/">
             <BurgerConstructorPage />
           </Route>
@@ -98,6 +103,11 @@ function App() {
           <Route path="/ingredients/:id">
             <Modal onClose={closeModal} title="Детали ингредиента">
               <IngredientDetails /> 
+            </Modal>
+          </Route>
+          <Route path="/feed/:id">
+            <Modal onClose={closeModal}>
+              <OrderDetails /> 
             </Modal>
           </Route>
         </Switch>

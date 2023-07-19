@@ -1,8 +1,30 @@
 .container {
-  padding-bottom: 52px;
+  min-width: 508px;
+}
+
+.status {
+  display: flex;
+  flex-direction: row;
+}
+
+.numberAndDate {
+  display: grid;
+  column-gap: 36px;
 }
 
 .list {
+  list-style-type: none;
+  min-width: 272px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.numberReady {
+  color: #00CCCC;
+}
+
+/*.list {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -55,4 +77,4 @@
 .main::-webkit-scrollbar-thumb {
   width: 8px;
   background: #8585AD;
-}
+}*/

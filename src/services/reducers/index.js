@@ -11,6 +11,7 @@ import { updateTokenReducer } from './update-token.js';
 import { getUserReducer } from "./get-user.js";
 import { updateUserReducer } from "./update-user";
 import { feedReducer } from "./feed.ws";
+/*import { getOrderReducer } from "./feed-details.ws";*/
 
 export const rootReducer = combineReducers({
    burgerIngredientsReducer: burgerIngredientsReducer,
@@ -24,5 +25,6 @@ export const rootReducer = combineReducers({
    updateTokenReducer: updateTokenReducer, 
    getUserReducer: getUserReducer,
    updateUserReducer: updateUserReducer,
-   feedReducer: feedReducer
+   feedReducer: feedReducer,
+   /*getOrderReducer: getOrderReducer*/
 })

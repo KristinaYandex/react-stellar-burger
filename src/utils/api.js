@@ -50,6 +50,10 @@ export function postIngredients(arrayIngredients) {
   })
 }
 
+export function getOrderNumber(number) {
+  return fetch(`${URL}/orders/${number}`)
+}
+
 export function forgotPassword(emailUser) {
   return fetch(`${URL}/password-reset`, {
     method: 'POST',
