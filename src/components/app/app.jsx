@@ -87,7 +87,7 @@ function App() {
           <Route path="/ingredients/:id">
             <IngredientDetailsPage />
           </Route>
-          <Route path="/feed">
+          <Route exact path="/feed">
             <OrderFeedPage />
           </Route>
           <Route path="/feed/:id">

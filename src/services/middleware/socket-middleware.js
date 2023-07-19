@@ -1,39 +1,59 @@
-export const socketMiddleware = wsUrl => {
+export const socketMiddleware = (wsActions) => {
   return store => {
     let socket = null;
 
   return next => action => {
     const { dispatch } = store;
     const { type } = action;
+
+    const {
+      wsConnect,
+      wsSendMessage,
+      onOpen,
+      onClose,
+      onError,
+      onMessage,
+      wsConnecting,
+      wsDisconnect,
+    } = wsActions;
  
-    if (type === 'WS_CONNECTION_START') {
+    if (type === wsConnect.type) {
       // объект класса WebSocket
-      socket = new WebSocket(wsUrl);
+      socket = new WebSocket(action.payload);/*Передадим url при подключении*/ 
+      dispatch(wsConnecting());
     }
 
     if (socket) {
       // функция, которая вызывается при открытии сокета
-      socket.onopen = event => {
-        dispatch({ type: 'WS_CONNECTION_SUCCESS', payload: event });
+      socket.onopen = () => {
+        dispatch(onOpen());
       };
 
       // функция, которая вызывается при ошибке соединения
-      socket.onerror = event => {
-        dispatch({ type: 'WS_CONNECTION_ERROR', payload: event });
+      socket.onerror = () => {
+        dispatch(onError("Error"));
       };
 
       // функция, которая вызывается при получении события от сервера
       socket.onmessage = event => {
         const { data } = event;
         const parseData = JSON.parse(data);
-        dispatch({ type: 'WS_GET_FEED_MESSAGE', payload: parseData });
+        dispatch(onMessage(parseData));
       };
       // функция, которая вызывается при закрытии соединения
-      socket.onclose = event => {
-        dispatch({ type: 'WS_CONNECTION_CLOSED', payload: event });
+      socket.onclose = () => {
+        dispatch(onClose());
       };
-    }
 
+      if (wsSendMessage && type === wsSendMessage.type) {
+        socket.send(JSON.stringify(action.payload));
+      }
+
+      if (wsDisconnect.type === type) {
+        socket.close();
+        socket = null;
+      }
+    }
     next(action);
   };
   };

@@ -5,10 +5,9 @@ export const middlewareProfile = wsUrl => {
   return next => action => {
     const { dispatch, getState } = store;
     const { type } = action;
-
     const { user } = getState().user;
  
-    if (type === 'WS_PROFILE_CONNECTION_START') {
+    if (type === 'WS_PROFILE_CONNECTION_START' && user) {
       // объект класса WebSocket
       socket = new WebSocket(`${wsUrl}?token=${user.token}`);
     }

@@ -5,15 +5,20 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getIngredients } from '../../services/selectors/burger-ingredients'
 import { getOrders } from '../../services/selectors/feed-ws'
 import { useParams } from 'react-router-dom'
-import { wsStart } from '../../services/actions/feed.ws'
+import { connect, disconnect } from "../../services/actions/feed.ws";
 
 function OrderDetails() {
   const dispatch = useDispatch(); 
 
-  useEffect(() => {
-    dispatch(wsStart())
-  }, [dispatch]) 
+  const GET_ORDERS_URL = "wss://norma.nomoreparties.space/orders/all";
 
+  useEffect(() => {
+    dispatch(connect(GET_ORDERS_URL));
+    return () => {
+      dispatch(disconnect());
+    }
+  }, [dispatch]);
+ 
     const {id} = useParams();
     const burgerIngredients = useSelector(getIngredients); /*Ингредиенты бургера*/ 
 
@@ -38,8 +43,16 @@ function OrderDetails() {
       }, 0);
     }, [idIngredients]);
 
+    
     /*Дата и время заказа*/
     const dateFromServer = order?.createdAt; 
+
+    const count = (ingredient) => {
+      const countIngredient = order.ingredients.filter((id) => id === ingredient._id);
+        console.log('ingredient:', ingredient)
+        console.log('order.ingredients:', order.ingredients)
+        return countIngredient.length;
+    };
     
     if (!order) return null
 
@@ -64,7 +77,7 @@ function OrderDetails() {
                           />
                         </div>
                         <p className="text text_type_main-medium">{ingredient.name}</p>
-                        <p className="text text_type_digits-default"></p>
+                        <p className="text text_type_digits-default">{count(ingredient)}☓</p>
                       </div>
                       <div className={feedOrderStyle.cost}>
                         <p className="text text_type_main-medium">{ingredient.price}</p>

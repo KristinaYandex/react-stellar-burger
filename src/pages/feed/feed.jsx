@@ -4,15 +4,21 @@ import FeedLink from "../../components/feed-link/feed-link";
 import FeedStatus from "../../components/feed-status/feed-status";
 import feedPageStyle from "./feed.module.css";
 import { getOrders } from "../../services/selectors/feed-ws";
-import { wsStart } from "../../services/actions/feed.ws";
+import { connect, disconnect } from "../../services/actions/feed.ws";
 
 export function OrderFeedPage() {
   const orders = useSelector(getOrders);
-  console.log(orders)
+
+  console.log(orders);
   const dispatch = useDispatch();
 
+  const GET_ORDERS_URL = "wss://norma.nomoreparties.space/orders/all";
+
   useEffect(() => {
-    dispatch(wsStart());
+    dispatch(connect(GET_ORDERS_URL));
+    return () => {
+      dispatch(disconnect());
+    }
   }, [dispatch]);
  
   return (
