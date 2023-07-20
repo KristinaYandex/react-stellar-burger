@@ -11,28 +11,28 @@ const initialState = {
   
 export const feedReducer = (state = initialState, action) => {
   switch (action.type) {
-    case wsConnecting:
+    case wsConnecting.type:
       return {
         ...state,
         error: undefined,
         status: WebsocketStatus.CONNECTING
       };
 
-    case wsOpen:
+    case wsOpen.type:
       return {
         ...state,
         error: undefined,
         status: WebsocketStatus.ONLINE
       };
     
-    case wsClose:
+    case wsClose.type:
       return {
         ...state,
         status: WebsocketStatus.OFFLINE,
         error: undefined,
       };
   
-    case wsError:
+    case wsError.type:
       return {
         ...state,
         error: action.payload
@@ -40,7 +40,7 @@ export const feedReducer = (state = initialState, action) => {
   
           // Обработка происходит, когда с сервера возвращаются данные
           // В orders передадим данные, которые пришли с сервера
-    case wsMessage:
+    case wsMessage.type:
       return {
         ...state,
         error: undefined,

@@ -4,7 +4,7 @@ import feedPageStyle from "./details-feed.module.css";
 export function OrderDetailsPage() {
  
   return (
-    <main>
+    <main className={feedPageStyle.page}>
       <div className={feedPageStyle.section}>
         <OrderDetails />
       </div>

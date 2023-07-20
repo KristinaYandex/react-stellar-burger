@@ -4,8 +4,10 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'; 
 import { logOutFeed } from "../../services/actions/logout";
 import { updateUserFeed } from "../../services/actions/update-user";
-import { useHistory, NavLink } from "react-router-dom";
+import { useHistory, NavLink, useRouteMatch } from "react-router-dom";
 import { useEffect } from 'react';
+import { getCookie } from "../../utils/cookie";
+import { connectProfile, disconnectProfile } from "../../services/actions/feed-profile.ws";
 
 export function ProfilePage() {
   const dispatch = useDispatch();
@@ -39,6 +41,24 @@ export function ProfilePage() {
       })
     )
   } 
+
+  const GET_ORDERS_PROFILE_URL = "wss://norma.nomoreparties.space/orders";
+
+  /*const profileLink = useRouteMatch("/profile/orders");*/
+
+  useEffect(() => {
+    /*if (profileLink) {*/
+      const accessToken = getCookie("accessToken");
+      console.log(accessToken)
+      dispatch(connectProfile(`${GET_ORDERS_PROFILE_URL}?token=${accessToken}`));
+
+    /*}*/
+    return () => {
+      /*if (profileLink) {*/
+        dispatch(disconnectProfile());
+      /*}*/
+    }
+  }, [dispatch]);
 
   return (
     <div className={profilePageStyles.container}>

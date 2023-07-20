@@ -15,6 +15,14 @@ function FeedOrder({order}) {
     const idIngredients = order.ingredients.map((item) => idIngredient(item)); /*Массив всех ингредиентов в заказе по Id*/
 
     const totalSum = React.useMemo(() => {
+      return idIngredients?.reduce((price, item) => {
+        return (
+          price + item.price
+        );
+      }, 0);
+    }, [idIngredients]);
+
+    /*const totalSum = React.useMemo(() => {
       return idIngredients.reduce((price, item) => {
         return (
           price +
@@ -22,7 +30,7 @@ function FeedOrder({order}) {
           (item.type !== "bun" ? item.price : 0)
         );
       }, 0);
-    }, [idIngredients]);
+    }, [idIngredients]);*/
 
     /*Дата и время заказа*/
     const dateFromServer = order.createdAt;    

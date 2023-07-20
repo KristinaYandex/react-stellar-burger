@@ -36,12 +36,16 @@ function OrderDetails() {
     const totalSum = React.useMemo(() => {
       return idIngredients?.reduce((price, item) => {
         return (
-          price +
-          (item.type === "bun" ? item.price * 2 : 0) +
-          (item.type !== "bun" ? item.price : 0)
+          price + item.price
         );
       }, 0);
     }, [idIngredients]);
+
+    /*const totalSum = React.useMemo(() => idIngredients.reduce(
+      (price, item) => price +
+      (item.type === "bun" ? item.price * 2 : 0) +
+      (item.type !== "bun" ? item.price : 0)),
+      [idIngredients]);*/
 
     
     /*Дата и время заказа*/
@@ -49,8 +53,6 @@ function OrderDetails() {
 
     const count = (ingredient) => {
       const countIngredient = order.ingredients.filter((id) => id === ingredient._id);
-        console.log('ingredient:', ingredient)
-        console.log('order.ingredients:', order.ingredients)
         return countIngredient.length;
     };
     
@@ -77,10 +79,10 @@ function OrderDetails() {
                           />
                         </div>
                         <p className="text text_type_main-medium">{ingredient.name}</p>
-                        <p className="text text_type_digits-default">{count(ingredient)}☓</p>
                       </div>
                       <div className={feedOrderStyle.cost}>
-                        <p className="text text_type_main-medium">{ingredient.price}</p>
+                        <p className="text text_type_digits-default">{count(ingredient)} x</p>
+                        <p className="text text_type_digits-default">{ingredient.price}</p>
                         <CurrencyIcon type="primary"/>
                       </div>
                     </div>

@@ -1,9 +1,9 @@
-export const WS_PROFILE_CONNECTION_START = 'WS_PROFILE_CONNECTION_START';
-export const WS_PROFILE_CONNECTION_SUCCESS = 'WS_PROFILE_CONNECTION_SUCCESS'; 
-export const WS_PROFILE_CONNECTION_CLOSED = 'WS_PROFILE_CONNECTION_CLOSED';
-export const WS_PROFILE_GET_FEED_MESSAGE = 'WS_PROFILE_GET_FEED_MESSAGE';
-export const WS_PROFILE_CONNECTION_ERROR = 'WS_PROFILE_CONNECTION_ERROR';
+import { createAction } from "@reduxjs/toolkit";
 
-export const wsStart = () => ({
-  type: WS_PROFILE_CONNECTION_START
-})
+export const connectProfile = createAction('FEED_CONNECT_PROFILE');
+export const disconnectProfile = createAction('FEED_DISCONNECT_PROFILE');
+export const wsConnectingProfile = createAction('FEED_WS_CONNECTING_PROFILE');
+export const wsOpenProfile = createAction('FEED_WS_OPEN_PROFILE');
+export const wsCloseProfile = createAction('FEED_WS_CLOSE_PROFILE');
+export const wsMessageProfile = createAction('FEED_WS_GET_MESSAGE_PROFILE');
+export const wsErrorProfile = createAction('FEED_WS_ERROR_PROFILE');

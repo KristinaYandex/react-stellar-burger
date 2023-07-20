@@ -13,6 +13,7 @@ import { ProfilePage } from "../../pages/profile/profile";
 import { ResetPasswordPage } from "../../pages/reset-password/reset-password";
 import { OrderFeedPage } from "../../pages/feed/feed";
 import { OrderDetailsPage } from "../../pages/details-feed/details-feed";
+import { OrderFeedProfilePage } from "../../pages/feed-profile/feed-profile";
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getIngredientsFeed } from "../../services/actions/burger-ingredients";
@@ -59,10 +60,15 @@ function App() {
       )}
       {!ingredientsRequest && !ingredientsFailed && ingredients.length && (
         <Switch location={background || location}>
-          <Route path="/profile">
+          <Route exact path="/profile">
             <ProtectedRoute>
               <ProfilePage />
             </ProtectedRoute>
+          <Route exact path="profile/orders">
+            <ProtectedRoute>
+              <OrderFeedProfilePage />
+            </ProtectedRoute>
+          </Route>
           </Route>
           <Route path="/login">
             <ProtectedRoute onlyUnAuth>

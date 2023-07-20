@@ -1,36 +1,44 @@
-import { WS_PROFILE_CONNECTION_ERROR, WS_PROFILE_CONNECTION_SUCCESS, WS_PROFILE_CONNECTION_CLOSED, WS_PROFILE_GET_FEED_MESSAGE } from "../../services/actions/feed.ws";
+import { wsConnectingProfile, wsOpenProfile, wsCloseProfile, wsMessageProfile, wsErrorProfile } from "../../services/actions/feed-profile.ws";
+import { WebsocketStatus } from '../../utils/feed-status';
 
 const initialState = {
-  wsConnected: false,
+  status: WebsocketStatus.OFFLINE,
   orders: [],
   error: undefined
 };
   
 export const feedReducer = (state = initialState, action) => {
   switch (action.type) {
-    case WS_PROFILE_CONNECTION_SUCCESS:
+    case wsConnectingProfile.type:
       return {
         ...state,
         error: undefined,
-        wsConnected: true
+        status: WebsocketStatus.CONNECTING
       };
-  
-    case WS_PROFILE_CONNECTION_ERROR:
+
+    case wsOpenProfile.type:
       return {
         ...state,
-        error: action.payload,
-        wsConnected: false
+        error: undefined,
+        status: WebsocketStatus.ONLINE
       };
-  
-    case WS_PROFILE_CONNECTION_CLOSED:
+    
+    case wsCloseProfile.type:
       return {
         ...state,
-        wsConnected: false,
+        status: WebsocketStatus.OFFLINE,
         error: undefined,
       };
+  
+    case wsErrorProfile.type:
+      return {
+        ...state,
+        error: action.payload
+      };
+  
           // Обработка происходит, когда с сервера возвращаются данные
           // В orders передадим данные, которые пришли с сервера
-    case WS_PROFILE_GET_FEED_MESSAGE:
+    case wsMessageProfile.type:
       return {
         ...state,
         error: undefined,
