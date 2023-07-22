@@ -1,15 +1,10 @@
-<<<<<<< HEAD
 export const socketMiddleware = (wsActions) => {
-=======
-export const socketMiddleware = wsUrl => {
->>>>>>> 6a42ab79d79aa1b014865e0c12d214d22067bbf7
   return store => {
     let socket = null;
 
   return next => action => {
     const { dispatch } = store;
     const { type } = action;
-<<<<<<< HEAD
 
     const {
       wsConnect,
@@ -26,17 +21,10 @@ export const socketMiddleware = wsUrl => {
       // объект класса WebSocket
       socket = new WebSocket(action.payload);/*Передадим url при подключении*/ 
       dispatch(wsConnecting());
-=======
- 
-    if (type === 'WS_CONNECTION_START') {
-      // объект класса WebSocket
-      socket = new WebSocket(wsUrl);
->>>>>>> 6a42ab79d79aa1b014865e0c12d214d22067bbf7
     }
 
     if (socket) {
       // функция, которая вызывается при открытии сокета
-<<<<<<< HEAD
       socket.onopen = () => {
         dispatch(onOpen());
       };
@@ -44,21 +32,11 @@ export const socketMiddleware = wsUrl => {
       // функция, которая вызывается при ошибке соединения
       socket.onerror = () => {
         dispatch(onError("Error"));
-=======
-      socket.onopen = event => {
-        dispatch({ type: 'WS_CONNECTION_SUCCESS', payload: event });
-      };
-
-      // функция, которая вызывается при ошибке соединения
-      socket.onerror = event => {
-        dispatch({ type: 'WS_CONNECTION_ERROR', payload: event });
->>>>>>> 6a42ab79d79aa1b014865e0c12d214d22067bbf7
       };
 
       // функция, которая вызывается при получении события от сервера
       socket.onmessage = event => {
         const { data } = event;
-<<<<<<< HEAD
         const parseData = JSON.parse(data);
         dispatch(onMessage(parseData));
       };
@@ -206,17 +184,3 @@ export const initStore = (initialState = {}) =>
     initialState,
     compose(applyMiddleware(thunkMiddleware), applyMiddleware(socketMiddleware(wsUrl, wsActions))) // Ваш код здесь
   );*/
-=======
-        dispatch({ type: 'WS_GET_FEED_MESSAGE', payload: data });
-      };
-      // функция, которая вызывается при закрытии соединения
-      socket.onclose = event => {
-        dispatch({ type: 'WS_CONNECTION_CLOSED', payload: event });
-      };
-    }
-
-    next(action);
-  };
-  };
-}; 
->>>>>>> 6a42ab79d79aa1b014865e0c12d214d22067bbf7

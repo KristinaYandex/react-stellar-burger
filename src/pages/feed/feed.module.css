@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 .mainPage {
   display: flex;
   flex-direction: row;
@@ -19,9 +18,4 @@
 
 .feedLink {
   width: 584px;
-=======
-.heading {
-  /*font-size: 36px;*/
-  text-align: center;
->>>>>>> 6a42ab79d79aa1b014865e0c12d214d22067bbf7
 }
