@@ -54,7 +54,7 @@ function OrderDetails() {
     };
 
     useEffect(() => {
-      history.replace(location.pathname.startsWith('/profile') ? `/profile/orders/${order._id}` : `/feed/${order._id}`, {background: true})
+      history.replace(location.pathname.startsWith('/profile') ? `/profile/orders/${order._id}` : `/feed/${order._id}`)
     }, [location.pathname])
     
     if (!order) return null
