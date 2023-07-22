@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { rootReducer } from './reducers/index';
 import { socketMiddleware } from './middleware/socket-middleware';
+<<<<<<< HEAD
 import { connect, disconnect, wsConnecting, wsOpen, wsClose, wsMessage, wsError } from './actions/feed.ws';
 import { connectProfile, disconnectProfile, wsConnectingProfile, wsOpenProfile, wsCloseProfile, wsMessageProfile, wsErrorProfile } from './actions/feed-profile.ws';
 
@@ -32,3 +33,13 @@ const generalStore = configureStore({
 })
 
 export default generalStore;
+=======
+
+const generalStore = configureStore({
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({serializableCheck: false})
+    .concat(socketMiddleware('wss://norma.nomoreparties.space/orders/all'))
+})
+
+export default generalStore;
+>>>>>>> 6a42ab79d79aa1b014865e0c12d214d22067bbf7

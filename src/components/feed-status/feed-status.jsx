@@ -1,14 +1,28 @@
+<<<<<<< HEAD
 import feedStatusStyle from "./feed-status.module.css";
+=======
+import feedStatusStyle from "./feed-status.css";
+>>>>>>> 6a42ab79d79aa1b014865e0c12d214d22067bbf7
 import { getOrders, getTotal, getTotalToday } from "../../services/selectors/feed-ws";
 import { useSelector } from 'react-redux';
 
 function FeedStatus() {
   const orders = useSelector(getOrders);
   const ordersTotal = useSelector(getTotal);
+<<<<<<< HEAD
   console.log(orders);
   console.log(ordersTotal);
   const ordersTotalToday = useSelector(getTotalToday);
 
+=======
+  const ordersTotalToday = useSelector(getTotalToday);
+
+  /*const getordersTotal = (store) => store.feedReducer.orders.total;
+  const getordersTotalToday = (store) => store.feedReducer.orders.totalToday;
+  const ordersTotal = useSelector(getordersTotal);
+  const ordersTotalToday = useSelector(getordersTotalToday);*/
+
+>>>>>>> 6a42ab79d79aa1b014865e0c12d214d22067bbf7
   const Tabs = {
     done: "done",
     pending: "pending"
@@ -19,6 +33,7 @@ function FeedStatus() {
 
   return (
     <div className={feedStatusStyle.container}>
+<<<<<<< HEAD
       <div className={feedStatusStyle.status}>
         <div className={feedStatusStyle.numberAndDate}>
           <p className="text text_type_main-medium">Готовы:</p>
@@ -50,6 +65,33 @@ function FeedStatus() {
         <p className="text text_type_digits-large">{ordersTotal}</p>
       </div>
       <div className={feedStatusStyle.totalToday}>
+=======
+      <div className={feedStatusStyle.numberAndDate}>
+        <p className="text text_type_main-medium">Готовы:</p>
+        <ul className={feedStatusStyle.list}>
+          {ordersReady.map((order) => {
+            return (
+              <li key={order.id} className={feedStatusStyle.mainSauce}>{order.number}</li>
+            );
+          })}
+        </ul>
+      </div>
+      <div className={feedStatusStyle.numberAndDate}>
+        <p className="text text_type_main-medium">В работе:</p>
+        <ul className={feedStatusStyle.list}>
+          {ordersAtWork.map((order) => {
+            return (
+              <li key={order.id} className={feedStatusStyle.mainSauce}>{order.number}</li>
+            );
+          })}
+        </ul>
+      </div>
+      <div className={feedStatusStyle.numberAndDate}>
+        <h3 className="text text_type_main-medium">Выполнено за все время:</h3>
+        <p className="text text_type_digits-large">{ordersTotal}</p>
+      </div>
+      <div className={feedStatusStyle.numberAndDate}>
+>>>>>>> 6a42ab79d79aa1b014865e0c12d214d22067bbf7
         <h3 className="text text_type_main-medium">Выполнено за сегодня:</h3>
         <p className="text text_type_digits-large">{ordersTotalToday}</p>
       </div>

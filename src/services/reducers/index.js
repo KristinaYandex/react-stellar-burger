@@ -11,8 +11,11 @@ import { updateTokenReducer } from './update-token.js';
 import { getUserReducer } from "./get-user.js";
 import { updateUserReducer } from "./update-user";
 import { feedReducer } from "./feed.ws";
+<<<<<<< HEAD
 import { feedReducerProfile } from "./feed-profile.ws";
 import { ordersReducer } from "./get-order";
+=======
+>>>>>>> 6a42ab79d79aa1b014865e0c12d214d22067bbf7
 
 export const rootReducer = combineReducers({
    burgerIngredientsReducer: burgerIngredientsReducer,
@@ -26,7 +29,11 @@ export const rootReducer = combineReducers({
    updateTokenReducer: updateTokenReducer, 
    getUserReducer: getUserReducer,
    updateUserReducer: updateUserReducer,
+<<<<<<< HEAD
    feedReducer: feedReducer,
    feedReducerProfile: feedReducerProfile,
    ordersReducer: ordersReducer 
+=======
+   feedReducer: feedReducer
+>>>>>>> 6a42ab79d79aa1b014865e0c12d214d22067bbf7
 })

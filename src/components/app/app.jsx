@@ -12,7 +12,10 @@ import { RegisterPage } from "../../pages/register/register";
 import { ProfilePage } from "../../pages/profile/profile";
 import { ResetPasswordPage } from "../../pages/reset-password/reset-password";
 import { OrderFeedPage } from "../../pages/feed/feed";
+<<<<<<< HEAD
 import { OrderDetailsPage } from "../../pages/details-feed/details-feed";
+=======
+>>>>>>> 6a42ab79d79aa1b014865e0c12d214d22067bbf7
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getIngredientsFeed } from "../../services/actions/burger-ingredients";
@@ -97,12 +100,18 @@ function App() {
           <Route path="/ingredients/:id">
             <IngredientDetailsPage />
           </Route>
+<<<<<<< HEAD
           <Route exact path="/feed">
             <OrderFeedPage />
           </Route>
           <Route path="/feed/:id">
             <OrderDetailsPage  />
           </Route>
+=======
+          <Route path="/feed">
+            <OrderFeedPage />
+          </Route>
+>>>>>>> 6a42ab79d79aa1b014865e0c12d214d22067bbf7
           <Route exact={true} path="/">
             <BurgerConstructorPage />
           </Route>
