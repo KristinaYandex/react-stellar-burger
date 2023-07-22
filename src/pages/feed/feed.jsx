@@ -25,7 +25,9 @@ export function OrderFeedPage() {
     <main className={feedPageStyle.section}>
       <h2 className={`${feedPageStyle.heading} text text_type_main-large`}>Лента заказов</h2>
       <div className={feedPageStyle.mainPage}>
-        <FeedLink orders={orders}/>
+        <div className={feedPageStyle.feedLink}>
+          <FeedLink orders={orders}/>
+        </div>
         <FeedStatus />
       </div>
     </main>

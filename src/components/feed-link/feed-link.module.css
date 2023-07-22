@@ -1,9 +1,9 @@
 .container {
   min-width: 608px;
-  height: 640px;
+  max-width: 840px;
+  height: 780px;
   overflow-y: scroll;
   scroll-behavior: smooth;
-  /*background-color: yellow;*/
 }
 
 .container::-webkit-scrollbar {

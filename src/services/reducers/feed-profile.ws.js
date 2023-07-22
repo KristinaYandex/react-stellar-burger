@@ -7,7 +7,7 @@ const initialState = {
   error: undefined
 };
   
-export const feedReducer = (state = initialState, action) => {
+export const feedReducerProfile = (state = initialState, action) => {
   switch (action.type) {
     case wsConnectingProfile.type:
       return {

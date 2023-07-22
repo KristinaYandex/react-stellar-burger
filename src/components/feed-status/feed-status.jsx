@@ -24,13 +24,9 @@ function FeedStatus() {
           <p className="text text_type_main-medium">Готовы:</p>
           <ul className={feedStatusStyle.list}>
             {ordersReady.map((order, index) => {
-              if (index > 10) {
-                return null
-              } else if (index <= 10) {
-                return (
-                  <li key={index} className={`${feedStatusStyle.numberReady} text text_type_digits-default`}>{order.number}</li>
-                );
-              }
+              return (
+                <li key={index} className={`${feedStatusStyle.numberReady} text text_type_digits-default`}>{order.number}</li>
+              )
             })}
           </ul>
         </div>
@@ -53,7 +49,7 @@ function FeedStatus() {
         <h3 className="text text_type_main-medium">Выполнено за все время:</h3>
         <p className="text text_type_digits-large">{ordersTotal}</p>
       </div>
-      <div className={feedStatusStyle.total}>
+      <div className={feedStatusStyle.totalToday}>
         <h3 className="text text_type_main-medium">Выполнено за сегодня:</h3>
         <p className="text text_type_digits-large">{ordersTotalToday}</p>
       </div>

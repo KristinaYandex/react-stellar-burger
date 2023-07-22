@@ -13,7 +13,6 @@ import { ProfilePage } from "../../pages/profile/profile";
 import { ResetPasswordPage } from "../../pages/reset-password/reset-password";
 import { OrderFeedPage } from "../../pages/feed/feed";
 import { OrderDetailsPage } from "../../pages/details-feed/details-feed";
-import { OrderFeedProfilePage } from "../../pages/feed-profile/feed-profile";
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getIngredientsFeed } from "../../services/actions/burger-ingredients";
@@ -64,11 +63,11 @@ function App() {
             <ProtectedRoute>
               <ProfilePage />
             </ProtectedRoute>
-          <Route exact path="profile/orders">
-            <ProtectedRoute>
-              <OrderFeedProfilePage />
-            </ProtectedRoute>
           </Route>
+          <Route exact path="/profile/orders">
+            <ProtectedRoute>
+              <ProfilePage />
+            </ProtectedRoute>
           </Route>
           <Route path="/login">
             <ProtectedRoute onlyUnAuth>
@@ -97,7 +96,10 @@ function App() {
             <OrderFeedPage />
           </Route>
           <Route path="/feed/:id">
-            <OrderDetailsPage />
+            <OrderDetailsPage  />
+          </Route>
+          <Route path="/profile/orders/:id">
+            <OrderDetailsPage  />
           </Route>
           <Route exact={true} path="/">
             <BurgerConstructorPage />
@@ -111,7 +113,12 @@ function App() {
               <IngredientDetails /> 
             </Modal>
           </Route>
-          <Route path="/feed/:id">
+          <Route exact path="/feed/:id">
+            <Modal onClose={closeModal}>
+              <OrderDetails /> 
+            </Modal>
+          </Route>
+          <Route exact path="/profile/orders/:id">
             <Modal onClose={closeModal}>
               <OrderDetails /> 
             </Modal>

@@ -1,28 +1,31 @@
 import React, { useEffect } from 'react'
 import { FormattedDate, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import feedOrderStyle from './feed-order-details.module.css'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { getIngredients } from '../../services/selectors/burger-ingredients'
-import { getOrders } from '../../services/selectors/feed-ws'
 import { useParams } from 'react-router-dom'
-import { connect, disconnect } from "../../services/actions/feed.ws";
+import { getOrders } from '../../services/selectors/feed-ws'
+import { useHistory, useLocation  } from "react-router-dom";
 
 function OrderDetails() {
-  const dispatch = useDispatch(); 
-
-  const GET_ORDERS_URL = "wss://norma.nomoreparties.space/orders/all";
-
-  useEffect(() => {
-    dispatch(connect(GET_ORDERS_URL));
-    return () => {
-      dispatch(disconnect());
-    }
-  }, [dispatch]);
+    const history = useHistory();
+    const location = useLocation();
  
     const {id} = useParams();
     const burgerIngredients = useSelector(getIngredients); /*Ингредиенты бургера*/ 
 
-    const orders = useSelector(getOrders); 
+    const order = useSelector(store => {
+      let order = store.feedReducer.orders?.find((el) => el._id === id) 
+      if (order) {
+        return order;
+      }
+      order = store.feedReducerProfile.orders?.find((el) => el._id === id) 
+      if (order) {
+        return order;
+      }
+    })
+
+    /*const orders = useSelector(getOrders); 
     const order = orders?.find((item) => item._id === id); /*Один заказ*/ 
 
     function idIngredient(ingredient) {
@@ -30,6 +33,7 @@ function OrderDetails() {
     }
 
     const idIngredients = order?.ingredients.map((item) => idIngredient(item)); /*Массив всех ингредиентов в заказе по Id*/
+
 
     const orderIngredients = burgerIngredients.filter(({_id}) => order?.ingredients.includes(_id))  /*Уникальные элементы*/
 
@@ -40,13 +44,6 @@ function OrderDetails() {
         );
       }, 0);
     }, [idIngredients]);
-
-    /*const totalSum = React.useMemo(() => idIngredients.reduce(
-      (price, item) => price +
-      (item.type === "bun" ? item.price * 2 : 0) +
-      (item.type !== "bun" ? item.price : 0)),
-      [idIngredients]);*/
-
     
     /*Дата и время заказа*/
     const dateFromServer = order?.createdAt; 
@@ -55,6 +52,10 @@ function OrderDetails() {
       const countIngredient = order.ingredients.filter((id) => id === ingredient._id);
         return countIngredient.length;
     };
+
+    useEffect(() => {
+      history.replace(location.pathname.startsWith('/profile') ? `/profile/orders/${order._id}` : `/feed/${order._id}`)
+    }, [location.pathname])
     
     if (!order) return null
 

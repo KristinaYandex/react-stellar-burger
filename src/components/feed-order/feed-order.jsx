@@ -5,14 +5,13 @@ import { useSelector } from "react-redux";
 import { getIngredients } from "../../services/selectors/burger-ingredients";
 
 function FeedOrder({order}) {
-
     const burgerIngredients = useSelector(getIngredients); /*Ингредиенты бургера*/ 
 
     function idIngredient(ingredient) {
       return burgerIngredients.find((item) => item._id === ingredient); /*Id ингредиента*/
     }
 
-    const idIngredients = order.ingredients.map((item) => idIngredient(item)); /*Массив всех ингредиентов в заказе по Id*/
+    const idIngredients = order.ingredients.map((item) => idIngredient(item)).filter(Boolean); /*Массив всех ингредиентов в заказе по Id*/
 
     const totalSum = React.useMemo(() => {
       return idIngredients?.reduce((price, item) => {
@@ -21,17 +20,7 @@ function FeedOrder({order}) {
         );
       }, 0);
     }, [idIngredients]);
-
-    /*const totalSum = React.useMemo(() => {
-      return idIngredients.reduce((price, item) => {
-        return (
-          price +
-          (item.type === "bun" ? item.price * 2 : 0) +
-          (item.type !== "bun" ? item.price : 0)
-        );
-      }, 0);
-    }, [idIngredients]);*/
-
+    
     /*Дата и время заказа*/
     const dateFromServer = order.createdAt;    
 
