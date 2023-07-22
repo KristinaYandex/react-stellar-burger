@@ -1,35 +1,17 @@
 import profilePageStyles from './profile.module.css';
-import { Input, EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useState } from 'react'; 
+import { Button } from '@ya.praktikum/react-developer-burger-ui-components'; 
 import { useDispatch, useSelector } from 'react-redux'; 
 import { logOutFeed } from "../../services/actions/logout";
-import { updateUserFeed } from "../../services/actions/update-user";
-import { useHistory, NavLink } from "react-router-dom";
-import { useEffect } from 'react';
+import { useHistory, NavLink, Route, Switch } from "react-router-dom";
+import ProfileForm from "../../components/profile-form/profile-form";
+import FeedLink from "../../components/feed-link/feed-link";
+import { getOrderProfile } from "../../services/selectors/feed-profile.ws";
 
 export function ProfilePage() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const getUser = (store) => store.getUserReducer.user;
-  const user = useSelector(getUser);
-
-  const [form, setForm] = useState({ name: user.name, email: user.email, password: '' });
-
-  const onChange = e => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  useEffect(() => {
-    dispatch(updateUserFeed(form.email, form.name));
-  }, [dispatch, form.email, form.name]);
-
-  const resetUser = (e) => {
-    e.preventDefault();
-    setForm({ name: user.name, email: user.email, password: '' });
-  }
-
-  const isFormChanged = form.name !== user.name || form.email !== user.email || form.password;
+  const orders = useSelector(getOrderProfile);
 
   const onLogout = (e) => {
     e.preventDefault();
@@ -39,6 +21,10 @@ export function ProfilePage() {
       })
     )
   } 
+
+  const ordersReverse = orders
+    ?.slice()
+    .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
 
   return (
     <div className={profilePageStyles.container}>
@@ -54,27 +40,18 @@ export function ProfilePage() {
         </Button>
         <p className="text text_type_main-default text_color_inactive">В этом разделе вы можете изменить свои персональные данные</p>
       </nav>
-      <form className={profilePageStyles.form} onSubmit={resetUser}>
-        <Input placeholder="Имя" value={form.name} name="name" onChange={onChange} icon="EditIcon"/>
-        <EmailInput placeholder="Логин" value={form.email} name="email" onChange={onChange} icon="EditIcon"/>
-        <PasswordInput
-          placeholder="Пароль"
-          value={form.password}
-          name="password"
-          onChange={onChange}
-          icon="EditIcon"
-        />
-        {isFormChanged ? (
-          <div>
-            <Button htmlType="submit" type="primary">
-              Сохранить
-            </Button>
-            <Button htmlType="submit" type="secondary">
-              Отмена
-            </Button>
-          </div>
-        ) : null}
-      </form>
+      <div>
+        <Switch>
+          <Route exact path={'/profile'}>
+            <ProfileForm />
+          </Route>
+          <Route path={'/profile/orders'}>
+            <div className={profilePageStyles.feedLink}>
+              <FeedLink orders={ordersReverse}/>
+            </div>
+          </Route>
+        </Switch>
+      </div>
     </div>
   );
 }

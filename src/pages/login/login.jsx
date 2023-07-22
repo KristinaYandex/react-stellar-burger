@@ -26,7 +26,7 @@ export function LoginPage() {
     e.preventDefault();
     dispatch(authorizationFeed(form.email, form.password));
     if (!authorizationUserRequest && !authorizationUserFailed) {
-      history.push('/')
+      history.go(-1)
     }
   }
 

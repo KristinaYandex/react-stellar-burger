@@ -20,7 +20,7 @@ function AppHeader() {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/orders" className={appHeaderStyles.header__link} activeClassName={appHeaderStyles.link_active}>
+              <NavLink to="/feed" className={appHeaderStyles.header__link} activeClassName={appHeaderStyles.link_active}>
                 <ListIcon type={orderLink ? "primary" : "secondary"} />
                 <p className="text text_type_main-default">Лента заказов</p>
               </NavLink>

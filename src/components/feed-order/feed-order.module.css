@@ -1,0 +1,125 @@
+.container {
+  max-width: 100%;
+}
+
+.order {
+  background-color: #1C1C21;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 24px;
+  padding-bottom: 24px;
+  flex-direction: column;
+  row-gap: 24px;
+  border-radius: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.list {
+  position: relative;
+  min-height: 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  list-style-type: none;
+}
+
+.image {
+  position: absolute;
+  border: 2px solid transparent;
+  background-image: linear-gradient(#000000, #000000), radial-gradient(#801AB2, #4C4CFF);
+  background-clip: content-box, border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 64px;
+  max-height: 64px;
+  border-radius: 100px;
+}
+
+.image:nth-child(1) {
+  left: 0;
+  z-index: 10;
+}
+
+.image:nth-child(2) {
+  left: 48px;
+  z-index: 9;
+}
+
+.image:nth-child(3) {
+  left: 96px;
+  z-index: 8;
+}
+
+.image:nth-child(4) {
+  left: 144px;
+  z-index: 7;
+}
+
+.image:nth-child(5) {
+  left: 192px;
+  z-index: 6;
+}
+
+.image:nth-child(6) {
+  left: 240px;
+  z-index: 3;
+}
+
+.count {
+  border: 2px solid transparent;
+  background-image: linear-gradient(#000000, #000000), radial-gradient(#801AB2, #4C4CFF);
+  background-clip: content-box, border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 64px;
+  min-height: 64px;
+  border-radius: 100px;
+  position: absolute;
+  left: 240px;
+  z-index: 4;
+  color: #F2F2F3;
+}
+
+.numberAndDate {
+  min-width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.number {
+  color: #F2F2F3;
+}
+
+.heading {
+  max-width: 100%;
+  color: #F2F2F3;
+}
+
+.details {
+  display: flex;
+  min-width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.cost {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.statusDone {
+  color: #00CCCC;
+}
+
+.text {
+  text-align: left;
+  width: 100%;
+}

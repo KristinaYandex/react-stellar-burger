@@ -1,0 +1,36 @@
+.container {
+  min-width: 508px;
+}
+
+.status {
+  display: flex;
+  flex-direction: row;
+  column-gap: 36px;
+}
+
+.numberAndDate {
+  display: grid;
+  column-gap: 36px;
+  padding-bottom: 60px;
+}
+
+.list {
+  list-style-type: none;
+  min-width: 272px;
+  display: grid;
+  flex-direction: column;
+  grid-auto-flow: column;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  gap: 8px;
+  flex-wrap: wrap;
+  text-align: start;
+  padding: 0;
+}
+
+.numberReady {
+  color: #00CCCC;
+}
+
+.total {
+  padding-bottom: 60px;
+}
