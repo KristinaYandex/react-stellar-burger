@@ -1,0 +1,31 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+  min-width: 608px;
+  max-width: 840px;
+  height: 780px;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+
+.container::-webkit-scrollbar {
+  width: 8px;
+  background: #2F2F37;
+}
+
+.container::-webkit-scrollbar-thumb {
+  width: 8px;
+  background: #8585AD;
+}
+
+
+.main {
+  text-decoration: none;
+}
+
+.list {
+  flex-direction: column;
+  display: flex;
+  row-gap: 24px;
+}
