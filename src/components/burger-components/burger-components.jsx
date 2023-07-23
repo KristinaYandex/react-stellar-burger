@@ -3,13 +3,14 @@ import burgerComponents from "./burger-components.module.css";
 import IngredientBurger from "../ingredient-burger/ingredient-burger";
 import {ingredientPropType} from "../../utils/prop-types"
 import PropTypes from "prop-types";
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 const BurgerComponents = forwardRef(({ingredients}, ref) => {
+  const location = useLocation();
   const history = useHistory();
 
   const openModal = (item) => {
-    history.replace(`/ingredients/${item._id}`, {background: true})
+    history.replace(`/ingredients/${item._id}`, {background: location})
   }
 
   return (

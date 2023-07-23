@@ -34,7 +34,16 @@ function App() {
   const user = useSelector(getUser);
 
   const closeModal = () => {
-    history.go(-1)
+    const currentURL = location.pathname
+    const currentURLArrayParts = currentURL.split('/')
+    const currentURLArrayPartsWithoutLastPart = currentURLArrayParts.slice(0, -1)
+    const previousURL = currentURLArrayPartsWithoutLastPart.join('/')
+
+    history.replace(previousURL)
+  }
+
+  const closeModalIngredient = () => {
+    history.push("/")
   }
   
   useEffect(() => {
@@ -111,7 +120,7 @@ function App() {
       {background && (
         <Switch>
           <Route path="/ingredients/:id">
-            <Modal onClose={closeModal} title="Детали ингредиента">
+            <Modal onClose={closeModalIngredient} title="Детали ингредиента">
               <IngredientDetails /> 
             </Modal>
           </Route>

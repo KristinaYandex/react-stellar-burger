@@ -39,8 +39,8 @@ const ConstructorIngredient = (ConstructorIngredientRow) => {
   )
 }
 
-ConstructorIngredient.propTypes = {
+/*ConstructorIngredient.propTypes = {
   props: PropTypes.arrayOf(ingredientPropType.isRequired).isRequired
-}
+}*/
 
 export default ConstructorIngredient
