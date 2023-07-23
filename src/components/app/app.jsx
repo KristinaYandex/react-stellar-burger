@@ -34,7 +34,7 @@ function App() {
   const user = useSelector(getUser);
 
   const closeModal = () => {
-    history.push("/")
+    history.go(-1)
   }
   
   useEffect(() => {
@@ -59,17 +59,17 @@ function App() {
       )}
       {!ingredientsRequest && !ingredientsFailed && ingredients.length && (
         <Switch location={background || location}>
-          <Route path="/profile">
-            <ProtectedRoute>
-              <ProfilePage />
-            </ProtectedRoute>
-          </Route>
           <Route exact path="/profile/orders/:number">
             <ProtectedRoute>
               <OrderDetailsPage />
             </ProtectedRoute>
           </Route>
-          <Route path="/profile/orders">
+          <Route path="/profile">
+            <ProtectedRoute>
+              <ProfilePage />
+            </ProtectedRoute>
+          </Route>
+          <Route exact path="/profile/orders">
             <ProtectedRoute>
               <ProfilePage />
             </ProtectedRoute>
@@ -120,7 +120,7 @@ function App() {
               <OrderDetails /> 
             </Modal>
           </Route>
-          <Route path="/profile/orders/:number">
+          <Route exact path="/profile/orders/:number">
             <Modal onClose={closeModal}>
               <OrderDetails /> 
             </Modal>

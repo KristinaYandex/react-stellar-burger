@@ -25,8 +25,8 @@ function FeedLink({orders}) {
       const accessToken = getCookie("accessToken");
       console.log(accessToken)
       dispatch(connectProfile(`${GET_ORDERS_PROFILE_URL}?token=${accessToken}`));
+
     }
-    
     return () => {
       if (profileLink) {
         dispatch(disconnectProfile());

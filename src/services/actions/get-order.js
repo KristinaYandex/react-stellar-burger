@@ -10,6 +10,7 @@ export function getHiddenOrders(orderNum) {
       type: GET_ORDER_FEED
     })
     getOrderNumber(orderNum) 
+      .then((response) => response.json())
       .then((res) => {
         if (res && res.success) {
           dispatch({

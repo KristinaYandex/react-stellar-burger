@@ -23,6 +23,7 @@ function ProfileForm() {
 
   const resetUser = (e) => {
     e.preventDefault();
+    if (isFormChanged) return
     setForm({ name: user.name, email: user.email, password: '' });
   }
 

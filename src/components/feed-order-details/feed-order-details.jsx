@@ -4,27 +4,24 @@ import feedOrderStyle from './feed-order-details.module.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { getIngredients } from '../../services/selectors/burger-ingredients'
 import { useParams } from 'react-router-dom'
-import { useHistory, useLocation  } from "react-router-dom";
 import { getHiddenOrders } from '../../services/actions/get-order'
 
 function OrderDetails() {
-    const history = useHistory();
-    const location = useLocation();
     const dispatch = useDispatch();
  
     const {number} = useParams();
     const burgerIngredients = useSelector(getIngredients); /*Ингредиенты бургера*/ 
 
     const order = useSelector(store => {
-      let order = store.feedReducer.orders.find((el) => el.number === number) 
+      let order = store.feedReducer.orders?.find((el) => String(el.number)) 
       if (order) {
         return order;
       }
-      order = store.feedReducerProfile.orders.find((el) => el.number === number) 
+      order = store.feedReducerProfile.orders?.find((el) => String(el.number) === number) 
       if (order) {
         return order;
       }
-      order = store.ordersReducer.orders.find((el) => el.number === number) 
+      order = store.ordersReducer.orders?.find((el) => String(el.number) === number) 
       if (order) {
         return order;
       }
@@ -36,12 +33,6 @@ function OrderDetails() {
         dispatch(getHiddenOrders(number))
       }
     }, [dispatch])
-
-    /*useEffect(() => {
-      history.replace(location.pathname.startsWith('/profile') ? `/profile/orders/${order._id}` : `/feed/${order._id}`, {background: location})
-    }, [location.pathname])*/
-
-    console.log(order);
     
     function idIngredient(ingredient) {
       return burgerIngredients.find((item) => item._id === ingredient); /*Id ингредиента*/
