@@ -12,19 +12,19 @@ function OrderDetails() {
     const location = useLocation();
     const dispatch = useDispatch();
  
-    const {id} = useParams();
+    const {number} = useParams();
     const burgerIngredients = useSelector(getIngredients); /*Ингредиенты бургера*/ 
 
     const order = useSelector(store => {
-      let order = store.feedReducer.orders?.find((el) => el._id === id) 
+      let order = store.feedReducer.orders.find((el) => el.number === number) 
       if (order) {
         return order;
       }
-      order = store.feedReducerProfile.orders?.find((el) => el._id === id) 
+      order = store.feedReducerProfile.orders.find((el) => el.number === number) 
       if (order) {
         return order;
       }
-      order = store.ordersReducer.orders?.find((el) => el._id === id) 
+      order = store.ordersReducer.orders.find((el) => el.number === number) 
       if (order) {
         return order;
       }
@@ -33,23 +33,23 @@ function OrderDetails() {
 
     useEffect(() => {
       if (!order) {
-        dispatch(getHiddenOrders(id))
+        dispatch(getHiddenOrders(number))
       }
     }, [dispatch])
 
-    useEffect(() => {
+    /*useEffect(() => {
       history.replace(location.pathname.startsWith('/profile') ? `/profile/orders/${order._id}` : `/feed/${order._id}`, {background: location})
-    }, [location.pathname])
-    
+    }, [location.pathname])*/
 
+    console.log(order);
+    
     function idIngredient(ingredient) {
       return burgerIngredients.find((item) => item._id === ingredient); /*Id ингредиента*/
     }
 
     const idIngredients = order?.ingredients.map((item) => idIngredient(item)); /*Массив всех ингредиентов в заказе по Id*/
 
-
-    const orderIngredients = burgerIngredients.filter(({_id}) => order?.ingredients.includes(_id))  /*Уникальные элементы*/
+    const orderIngredients = burgerIngredients?.filter(({_id}) => order?.ingredients.includes(_id))  /*Уникальные элементы*/
 
     const totalSum = React.useMemo(() => {
       return idIngredients?.reduce((price, item) => {

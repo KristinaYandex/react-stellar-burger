@@ -13,7 +13,7 @@ function FeedLink({orders}) {
   const history = useHistory();
 
   const openModal = (order) => {
-    history.replace(location.pathname.startsWith('/profile') ? `/profile/orders/${order._id}` : `/feed/${order._id}`, {background: location})
+    history.replace(location.pathname.startsWith('/profile') ? `/profile/orders/${order.number}` : `/feed/${order.number}`, {background: location})
   }
 
   const GET_ORDERS_PROFILE_URL = "wss://norma.nomoreparties.space/orders";
@@ -25,14 +25,14 @@ function FeedLink({orders}) {
       const accessToken = getCookie("accessToken");
       console.log(accessToken)
       dispatch(connectProfile(`${GET_ORDERS_PROFILE_URL}?token=${accessToken}`));
-
     }
+    
     return () => {
       if (profileLink) {
         dispatch(disconnectProfile());
       }
     }
-  }, [dispatch, profileLink]);
+  }, [dispatch]);
 
   return (
     <div className={feedLinkStyle.container}>

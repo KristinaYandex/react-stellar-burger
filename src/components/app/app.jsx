@@ -59,19 +59,19 @@ function App() {
       )}
       {!ingredientsRequest && !ingredientsFailed && ingredients.length && (
         <Switch location={background || location}>
-          <Route exact path="/profile">
+          <Route path="/profile">
             <ProtectedRoute>
               <ProfilePage />
             </ProtectedRoute>
           </Route>
-          <Route exact path="/profile/orders">
-            <ProtectedRoute>
-              <ProfilePage />
-            </ProtectedRoute>
-          </Route>
-          <Route path="/profile/orders/:id">
+          <Route exact path="/profile/orders/:number">
             <ProtectedRoute>
               <OrderDetailsPage />
+            </ProtectedRoute>
+          </Route>
+          <Route path="/profile/orders">
+            <ProtectedRoute>
+              <ProfilePage />
             </ProtectedRoute>
           </Route>
           <Route path="/login">
@@ -100,7 +100,7 @@ function App() {
           <Route exact path="/feed">
             <OrderFeedPage />
           </Route>
-          <Route path="/feed/:id">
+          <Route path="/feed/:number">
             <OrderDetailsPage  />
           </Route>
           <Route exact={true} path="/">
@@ -115,12 +115,12 @@ function App() {
               <IngredientDetails /> 
             </Modal>
           </Route>
-          <Route path="/feed/:id">
+          <Route path="/feed/:number">
             <Modal onClose={closeModal}>
               <OrderDetails /> 
             </Modal>
           </Route>
-          <Route exact path="/profile/orders/:id">
+          <Route path="/profile/orders/:number">
             <Modal onClose={closeModal}>
               <OrderDetails /> 
             </Modal>

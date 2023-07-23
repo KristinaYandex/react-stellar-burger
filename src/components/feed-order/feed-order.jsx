@@ -25,7 +25,7 @@ function FeedOrder({order}) {
     }, [idIngredients]);
     
     /*Дата и время заказа*/
-    const dateFromServer = order.createdAt;    
+    const dateFromServer = order?.createdAt;    
 
     return (
       <div className={feedOrderStyle.container}>
