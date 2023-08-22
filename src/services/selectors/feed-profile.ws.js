@@ -1,1 +1,0 @@
-export const getOrderProfile = (store) => store.feedReducerProfile.orders;

@@ -1,1 +1,0 @@
-export const getUser = (store) => store.loginReducer.user;

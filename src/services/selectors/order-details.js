@@ -1,1 +1,0 @@
-export const getOrderNumber = (store) => store.orderDetailsReducer.orderNumber;
