@@ -20,7 +20,7 @@ export type TIngredient = {
 };
 
 export type TBurgerComponent = {
-  ingredients: TIngredient[]
+  ingredients: TIngredient[];
 }
 
 export type TOrder = {
@@ -77,3 +77,44 @@ export type TRefreshData = {
 export type TError = {
   message: string;
 }
+
+export type TGetIngredint = {
+  ingredients: TIngredient[];
+  success: boolean;
+  data: TIngredient[];
+}
+
+export type TForgotPassword = {
+  success: boolean;
+}
+
+export type TGetUser = {
+  user: {
+    name: string;
+    email: string;
+  }
+  success?: boolean;
+};
+
+export type TLogin = {
+  success: boolean;
+  accessToken: string;
+  refreshToken: string;
+  user: {
+    name: string;
+    email: string;
+  }
+}
+
+export type TLogout = {
+  success: boolean;
+  user: {
+    name: string;
+    email: string;
+  }
+}
+
+export type TOrderDetails = {
+  success: boolean;
+  order: TOrder;
+};

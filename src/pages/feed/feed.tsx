@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../utils/store-types'
 import FeedLink from "../../components/feed-link/feed-link";
 import FeedStatus from "../../components/feed-status/feed-status";
 import feedPageStyle from "./feed.module.css";

@@ -1,5 +1,5 @@
 import { NavLink, useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../utils/store-types'
 import loginPageStyles from './login.module.css';
 import { EmailInput, PasswordInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { FormEventHandler, useState } from 'react'; 

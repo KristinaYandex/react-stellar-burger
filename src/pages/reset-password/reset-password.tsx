@@ -2,7 +2,7 @@ import { NavLink, useHistory, Redirect } from 'react-router-dom';
 import resetPasswordStyles from './reset-password.module.css';
 import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { resetPasswordFeedThunk } from '../../services/actions/reset-password';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../utils/store-types'
 import { useState } from 'react'; 
 import { getUser } from "../../services/selectors/login";
 import { getSuccess } from "../../services/selectors/forgot-password";

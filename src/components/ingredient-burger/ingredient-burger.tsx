@@ -2,8 +2,6 @@ import { useMemo } from 'react';
 import { useSelector } from '../../utils/store-types'
 import { CurrencyIcon, Counter } from "@ya.praktikum/react-developer-burger-ui-components";
 import ingredientBurgerStyle from "./ingredient-burger.module.css";
-import {ingredientPropType} from "../../utils/prop-types.js";
-import PropTypes from "prop-types";
 import { useDrag } from "react-dnd";
 import { getBun, getMainAndSauce } from "../../services/selectors/burger-constructor";
 import { FunctionComponent } from 'react';
@@ -50,10 +48,5 @@ const IngredientBurger: FunctionComponent<TStringFunc> = ({ingredient, onClick})
     </div>
   );
 }
-
-/*IngredientBurger.propTypes = {
-  ingredient: ingredientPropType.isRequired,
-  onClick: PropTypes.func.isRequired
-}*/
 
 export default IngredientBurger;

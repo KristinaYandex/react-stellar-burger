@@ -46,12 +46,12 @@ export const feedReducerProfile = (state = initialState, action: TFeedProfileAct
       // Обработка происходит, когда с сервера возвращаются данные
       // В orders передадим данные, которые пришли с сервера
     case 'FEED_WS_GET_MESSAGE_PROFILE':
+      const data = typeof action === 'object' ? action.payload : {}
       return {
         ...state,
         error: undefined,
-        // @ts-ignore
-        ...('payload' in action ? action.payload : {})
-    };
+        ...data
+      };
     default:
       return state;
     }

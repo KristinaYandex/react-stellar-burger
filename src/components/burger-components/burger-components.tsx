@@ -1,8 +1,6 @@
 import { forwardRef } from "react"
 import burgerComponents from "./burger-components.module.css";
 import IngredientBurger from "../ingredient-burger/ingredient-burger";
-import {ingredientPropType} from "../../utils/prop-types"
-import PropTypes from "prop-types";
 import { useHistory, useLocation } from 'react-router-dom';
 import { TIngredient, TBurgerComponent } from "../../utils/types";
 
@@ -27,8 +25,5 @@ const BurgerComponents = forwardRef<HTMLInputElement, TBurgerComponent>(({ingred
   );
 })
 
-/*BurgerComponents.propTypes = {
-  ingredients: PropTypes.arrayOf(ingredientPropType.isRequired).isRequired
-}*/
 
 export default BurgerComponents;

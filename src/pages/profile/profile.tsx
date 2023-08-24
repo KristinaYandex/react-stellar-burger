@@ -1,6 +1,6 @@
 import profilePageStyles from './profile.module.css';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'; 
-import { useDispatch, useSelector } from 'react-redux'; 
+import { useDispatch, useSelector } from '../../utils/store-types'
 import { logOutFeedThunk } from "../../services/actions/logout";
 import { useHistory, NavLink, Route, Switch } from "react-router-dom";
 import ProfileForm from "../../components/profile-form/profile-form";

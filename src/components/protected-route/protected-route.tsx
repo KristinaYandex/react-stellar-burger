@@ -8,9 +8,15 @@ interface IProps {
   children?: ReactNode;
 } 
 
+interface ILocationState {
+  from: {
+    pathname: string;
+  }
+} 
+
 const ProtectedRoute: FunctionComponent<IProps> = ({onlyUnAuth, children}) => {
   
-  const location = useLocation(); 
+  const location = useLocation<ILocationState>(); 
 
   const user = useSelector(getUser);
   const isAuthChecked = useSelector(getIsAuthChecked);
@@ -20,7 +26,7 @@ const ProtectedRoute: FunctionComponent<IProps> = ({onlyUnAuth, children}) => {
   }
   
   if (onlyUnAuth && user) {
-    // @ts-ignore
+    
     const { from } = location.state || {from: {pathname: "/"}};
 
     return <Redirect to={from} />
@@ -41,4 +47,3 @@ const ProtectedRoute: FunctionComponent<IProps> = ({onlyUnAuth, children}) => {
 }
 
 export default ProtectedRoute;
-

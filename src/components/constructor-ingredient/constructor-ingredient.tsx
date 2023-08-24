@@ -3,8 +3,6 @@ import { deleteIngredient, sortIngredient } from '../../services/actions/burger-
 import { useDispatch } from '../../utils/store-types'
 import { useDrag, useDrop } from 'react-dnd';
 import constructorIngredientStyle from './constructor-ingredient.module.css';
-import {ingredientPropType} from "../../utils/prop-types";
-import PropTypes from "prop-types";
 import { FunctionComponent } from 'react';
 
 interface IMovieProps {
@@ -49,9 +47,5 @@ const ConstructorIngredient: FunctionComponent<IMovieProps> = ({name, price, ima
     </div>
   )
 }
-
-/*ConstructorIngredient.propTypes = {
-  props: PropTypes.arrayOf(ingredientPropType.isRequired).isRequired
-}*/
 
 export default ConstructorIngredient
