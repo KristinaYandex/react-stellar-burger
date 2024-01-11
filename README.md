@@ -1,2 +1,3 @@
 # Каноническая работа проекта Stellar Burger 
-# Этап "Промежуточный проект. CRA-заготовка и структура папок под компоненты"
+# Демонстрация проекта на GitHub Pages:
+[https://kristinayandex.github.io/](https://kristinayandex.github.io/react-stellar-burger/)https://kristinayandex.github.io/react-stellar-burger/
