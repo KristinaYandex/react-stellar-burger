@@ -1,0 +1,41 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 480px;
+    row-gap: 24px;
+  }
+  
+  .heading {
+    text-align: center;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .button {
+    max-width: 480px;
+    margin-bottom: 80px;
+  }
+  
+  .links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: 16px;
+  }
+  
+  .link {
+    text-decoration: none;
+    color: #4C4CFF;
+  }
+  

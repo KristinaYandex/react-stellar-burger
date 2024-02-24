@@ -1,0 +1,41 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    column-gap: 60px;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 480px;
+    row-gap: 24px;
+  }
+
+  .menu {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    max-width: 320px;
+    row-gap: 24px;
+  }
+
+  .link {
+    text-decoration: none;
+    color: #8585AD;
+  }
+
+  .link_active {
+    color: #F2F2F3;
+  }
+
+  .button{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }

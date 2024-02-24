@@ -8,7 +8,7 @@
   padding: 26px 0 26px 20px;
 }
 
-.header_list {
+.header__list {
   list-style-type: none;
   display: flex;
   flex-direction: row;
@@ -18,14 +18,18 @@
   padding-left: 0;
 }
 
-.header_link {
+.header__link {
   display: flex;
   text-decoration: none;
   column-gap: 8px;
+  color: #8585AD;
 }
 
-.header_logo {
+.header__logo {
   margin-left: 152px;
   margin-right: 311px;
 }
 
+.link_active {
+  color: #F2F2F3;
+}
